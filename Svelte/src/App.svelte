@@ -21,13 +21,13 @@
 
 <Router>
 	<nav id="sideNav" class="navigation">		
-		<button class="closebtn" on:click="{closeNav}">&times;</button>	
+		<button style="background-color: transparent; border: 0;" class="closebtn" on:click="{closeNav}"><i class="far fa-times-circle" style="color: red;"></i></button>	
 		<MenuItem click="{closeNav}" url="/" text="Home"/>
 		<MenuItem click="{closeNav}" url="/stocks" text="Stocks"/>
 		<MenuItem click="{closeNav}" url="/" text="nowy element listy dupa test"/>			
 	</nav>
 	<div class="content">
-		<button on:click="{openNav}" >&#9776;</button>
+		<button on:click="{openNav}" ><i class="fas fa-align-justify"></i></button>
 		<Route path="/">
 			<Home />
 		</Route>
