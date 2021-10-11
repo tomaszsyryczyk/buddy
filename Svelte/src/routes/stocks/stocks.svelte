@@ -1,0 +1,1 @@
+a tutaj mamy stocks
