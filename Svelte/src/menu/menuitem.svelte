@@ -12,21 +12,18 @@
 </script>
 
 <a href="{url}" on:click="{safeFunction}" use:link={{disabled: false}}>
-    <div class="row">
+    <div class="row menu-item">
         <div class="{icon} icon"></div>
         <div class="content">{text}</div>
     </div>
 </a>
 
-<style>
-    .row {        
-        align-items: stretch;
-        align-content: stretch;
-        align-content: center;
-        padding: 10px;
+<style>  
+    .menu-item{
+        padding: 5px;;
     }
 
-    .row:hover {
+    .menu-item:hover {
         background-color: pink;
     }
 

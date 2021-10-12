@@ -17,22 +17,10 @@
 </script>
 	<Menu />
 	
-	<div class="top-panel debug">
+	<div class="row col-xs-1">
 		<Button icon="fas fa-align-justify" click="{openNav}"/>
-	</div>
-
-	<div class="content debug">		
-		<Router {routes}/>
-	</div>
+	</div>	
+	<Router {routes}/>
 
 <style>
-	.debug {
-		border: 3px solid #000;;
-	}	
-
-	.content {
-		width:90%;
-		margin: auto;
-		align-self: center;
-	}
 </style>

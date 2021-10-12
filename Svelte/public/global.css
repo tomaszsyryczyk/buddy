@@ -16,13 +16,6 @@ a {
 	text-decoration: none;
 }
 
-.row {
-	display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-}
-
 /* 
 a:hover {
 	text-decoration: underline;
