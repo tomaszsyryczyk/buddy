@@ -1,5 +1,5 @@
-<script>    
-	import { Router, Route, Link } from "svelte-navigator";
+<script>
+    import {link} from 'svelte-spa-router';
     export let url;
     export let click;
     export let text;
@@ -11,12 +11,12 @@
     }
 </script>
 
-<Link to="{url}" on:click="{safeFunction}"  >
+<a href="{url}" on:click="{safeFunction}" use:link={{disabled: false}}>
     <div class="row">
         <div class="{icon} icon"></div>
         <div class="content">{text}</div>
     </div>
-</Link>
+</a>
 
 <style>
     .row {        
@@ -38,6 +38,7 @@
     .icon {
         width: 20%;
         margin: auto 0;
+        height: 1.5em;
     }
     
 </style>

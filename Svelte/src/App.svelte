@@ -1,9 +1,13 @@
-<script>
-	import { Router, Link, Route } from "svelte-navigator";
+<script>	
 	import Home from "./routes/home/home.svelte";
 	import Stocks from "./routes/stocks/stocks.svelte";
 	import Menu from "./menu/menu.svelte";
 	import Button from "./controls/button/button.svelte"
+	import Router from 'svelte-spa-router'
+	const routes = {
+		'/': Home,
+		'/stocks': Stocks,
+	}
 
 	function openNav() {
 		var item = document.getElementsByClassName("navigation-container")[0];
@@ -11,8 +15,6 @@
 			item.style.width = "20%";
 	}	
 </script>
-
-<Router>
 	<Menu />
 	
 	<div class="top-panel debug">
@@ -20,14 +22,8 @@
 	</div>
 
 	<div class="content debug">		
-		<Route path="#/">
-			<Home />
-		</Route>
-		<Route path="#/stocks" component={Stocks} />
-		<Route path="/#" component={Home} />
-		
+		<Router {routes}/>
 	</div>
-</Router>
 
 <style>
 	.debug {

@@ -11,8 +11,8 @@
 <div class="navigation-container">
     <nav class="navigation">		
 		<CloseButton icon="far fa-times-circle" click="{closeNav}"/>
-        <MenuItem icon="fas fa-home" click="{closeNav}" url="#" text="Home"/>
-        <MenuItem click="{closeNav}" url="#/stocks" text="Stocks"/>
+        <MenuItem icon="fas fa-home" click="{closeNav}" url="/" text="Home"/>
+        <MenuItem icon="fas fa-chart-line" click="{closeNav}" url="/stocks" text="Stocks"/>
         <MenuItem click="{closeNav}" url="/" text="nowy element listy dupa test"/>			
     </nav>
 </div>
