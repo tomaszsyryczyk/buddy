@@ -14,18 +14,48 @@
 		'*': NotFound
 	}
 
+	const menus = [
+		{
+			url : "/",
+			name : "HOME",
+			icon : "fa-home"
+		}, 
+		{
+			url: "/stocks",
+			name : "Stocks",
+			icon : "fa-chart-line",			
+		},
+		{
+			url : "/",
+			name : "HOME",
+			icon : "fa-home"
+		}, 
+		{
+			url: "/stocks",
+			name : "Stocks",
+			icon : "fa-chart-line",			
+		}
+	]
+
 	function openNav() {
 		var item = document.getElementsByClassName("navigation-container")[0];
 		if(item)
 			item.style.width = "20%";
 	}	
 </script>
-	<Menu />
+	<Menu {menus} />
 	
-	<div class="row col-xs-1">
+	<div class="content">
+		<Router {routes}/>
+	</div>
+	<!-- <div class="row col-xs-1">
 		<Button icon="fas fa-align-justify" click="{openNav}"/>
-	</div>	
-	<Router {routes}/>
+	</div>	 -->
+
+
 
 <style>
+	.content {
+		margin:0 5em;
+	}
 </style>

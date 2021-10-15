@@ -1,33 +1,113 @@
 <script>
-    import MenuItem from "./menuitem.svelte";
-	import CloseButton from "./../controls/button/closeButton.svelte";
-    function closeNav() {		
-		var item = document.getElementsByClassName("navigation-container")[0];	
-		if(item)
-			item.style.width = "0";
+	import {link} from 'svelte-spa-router';
+	export let menus;
+
+	function toggleNav(){
+		openNav = !openNav;
 	}
+
+	let openNav = false;
+    $: navBtnClassName = openNav? "fa-times": "fa-bars";
+	$: extendedClassName = openNav? "nav-main-ext": "nav-main-short";
+	$: extClassName = openNav? "menu-item-ext": "menu-item-short";
+	$: hidden = openNav? "show" : "hidden";
+	
 </script>
 
-<div class="navigation-container">
-    <nav class="navigation">		
-		<CloseButton icon="far fa-times-circle" click="{closeNav}"/>
-        <MenuItem icon="fas fa-home" click="{closeNav}" url="/" text="Home"/>
-        <MenuItem icon="fas fa-chart-line" click="{closeNav}" url="/stocks" text="Stocks"/>
-        <MenuItem click="{closeNav}" url="/" text="nowy element listy dupa test"/>			
-    </nav>
+<div class="nav-main {extendedClassName}">
+	<div id="nav-button" class="menu-item row start-xs" on:click="{toggleNav}">
+		<div>
+			<div class="fas {navBtnClassName}"></div>
+		</div>		
+		<div class="description {hidden}">
+			MENU
+		</div>
+	</div>
+
+	{#each menus as menu}
+		<a href="{menu.url}" class="url"  use:link={{disabled: false}}>
+			<div class="row start-xs menu-item">
+				<div class="{extClassName}" >
+					<div class="fas {menu.icon}"></div>
+				</div>
+				<div class="description {hidden} ">
+					{menu.name}
+				</div>
+			</div>
+		</a>
+	{/each}
+	
+
+	
 </div>
 
-<style>
-    .navigation-container {
-		height: 100%; /* 100% Full-height */
-		width: 0; /* 0 width - change this with JavaScript */
-		position: fixed; /* Stay in place */
-		z-index: 1; /* Stay on top */
-		top: 0; /* Stay at the top */
+<style>		
+	@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+	}
+
+	@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+	}
+	.show {
+		animation: fade-in 1s;
+	}
+
+	.hidden {
+		display: none;
+		animation: fade-out 1s;
+	}
+
+	.description {
+		padding-left: 2em;
+	}
+
+	#nav-button {
+		background-color: #2e8364;
+		color: #393939;
+	}
+
+	.nav-main-ext {
+		width: 15em;
+	}
+
+	.nav-main-short {
+		width: 5em;
+	}
+
+	.nav-main {
+		position: fixed;
+		height: 100%;
+		top: 0;
 		left: 0;
-		background-color: rgb(187, 184, 184); 
-		overflow-x: hidden; /* Disable horizontal scroll */
-		padding-top: 60px; /* Place content 60px from the top */
-		transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+		background-color: #222222;
+		padding: 0;
+		transition: width 0.5s;
 	}	
+
+	.menu-item {
+		margin: auto;
+		padding: 1em;
+		color: #aaaaaa;
+		text-align: center;
+		font-size: 1.5em;
+	}
+
+	
+	.menu-item:hover {
+		background-color: #393939;
+		color: #2e8364;
+	}
+
+    
 </style>

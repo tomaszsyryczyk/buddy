@@ -7,6 +7,11 @@
 	--box-shadow-active: 2px 2px 5px 0px rgba(0, 0, 0,  0.27);
 }
 
+* {
+	outline: none;
+  }
+  
+
 html, body {
 	position: relative;
 	width: 100%;
