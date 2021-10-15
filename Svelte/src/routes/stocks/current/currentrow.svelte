@@ -15,6 +15,7 @@
     function down(check){
       if(check != null && check != undefined)
       {
+        
         var number = parseInt(check);
         return number < 0;
       }
