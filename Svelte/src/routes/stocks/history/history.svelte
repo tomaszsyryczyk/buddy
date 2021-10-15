@@ -1,4 +1,5 @@
 <script>    
+    import Stocks from "./../stocks.svelte";
     let data;
     var key = "stocks-history";
     function getData(){
@@ -7,4 +8,9 @@
     getData();
 </script>
 
+
+<Stocks>
+  
 test history {data}
+
+</Stocks>

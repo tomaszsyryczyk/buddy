@@ -1,30 +1,31 @@
 <script>
+    import {link} from 'svelte-spa-router';
     export let text;
-    export let click;
+    export let url;
 </script>
 
 
-<button class="btn" on:click="{click}" >{text}</button>
+<a href="{url}" use:link={{disabled: false}} class="btn">{text}</a>
 
 <style>
     .btn {
         padding: 6px 20px;
-        background-color: red;
+        background-color: var(--secondary-color);
         color: white;
         border: 0;
-        -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
-        -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
-        box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);        
+        -webkit-box-shadow: var(--box-shadow);
+        -moz-box-shadow:  var(--box-shadow);
+        box-shadow:  var(--box-shadow);        
         border-radius: 25px;
     }
 
     .btn:hover {
-        background-color: royalblue;
+        background-color: var(--secondary-color-shadow);
     }
 
     .btn:active {
             transform: scale(0.98);
-            box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.24);
+            box-shadow: var(--box-shadow-active);
     }
 
 </style>

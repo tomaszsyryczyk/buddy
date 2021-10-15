@@ -1,6 +1,7 @@
 <script>    
     import Header from "./currentheader.svelte";
     import Row from "./currentrow.svelte";
+    import Stocks from "./../stocks.svelte";
     let data;
     // var key = "stocks-current";
     // function getData(){
@@ -22,12 +23,14 @@
 
 </script>
 
-<div class="table">
-    <Header values="{columnNames}"/>     
-    {#each data as row}
-        <Row data="{row}" mapper={mapper} />
-    {/each}   
-  </div>
+<Stocks>
+    <div class="table">
+        <Header values="{columnNames}"/>     
+        {#each data as row}
+            <Row data="{row}" mapper={mapper} />
+        {/each}   
+    </div>
+</Stocks>
 
 
 <style>
