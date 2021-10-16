@@ -23,6 +23,9 @@ a {
 	text-decoration: none;
 }
 
+#nav-button {
+	cursor: pointer;
+}
 
 .nav-main .description {
 	position: absolute;
