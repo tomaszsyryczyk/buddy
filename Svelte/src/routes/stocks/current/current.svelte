@@ -12,12 +12,11 @@
     };
 
     onMount(async () => {
-    await fetch(`https://localhost:5001/api/stocks/current`)
-      .then(r => r.json())
-      .then(data => {
-        currentStocks = data;
-      });
-  })
+        axios('https://localhost:5001/api/stocks/current')
+            .then(function (response) {
+                currentStocks = response.data;
+            });
+    })
 </script>
 
 <Stocks>
