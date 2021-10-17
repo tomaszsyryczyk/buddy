@@ -1,41 +1,52 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Buddy.Events;
 using Buddy.Models;
+using Buddy.Services;
 using Microsoft.AspNetCore.Mvc;
+using TS.Common;
 
 namespace Buddy.Controllers
 {
     [ApiController]
     [Route("api/stocks")]
-    public class StocksController
+    public class StocksController : BuddyControllerBase
     {
-        public StocksController()
+        private readonly IStocksProvider _stocksProvider;
+        private readonly IMediateEvents<StockEvent> _mediateStockEvents;
+
+        public StocksController(IMediateEvents<StockEvent> mediateStockEvents, IStocksProvider stocksProvider)
         {
-            
+            _mediateStockEvents = mediateStockEvents;
+            _stocksProvider = stocksProvider;
         }
 
         [HttpPost]
-        public async Task Create(CreateStockEvent createEvent)
+        public async Task<IActionResult> StockEvent(StockEvent stockEvent)
         {
-
+            try
+            {
+                await _mediateStockEvents.Persist(stockEvent);
+                return new OkResult();
+            }
+            finally
+            {
+                throw new InvalidOperationException();
+            }    
         }
 
         [HttpGet("current")]
-        public CurrentStock[] Current()
+        public Task<CurrentStock[]> Current()
         {
-            return new CurrentStock[]
-            {
-                new CurrentStock("CDPR",5,172.5,DateTimeOffset.Now, 174.50),
-                new CurrentStock("KGHM",10,1.5,DateTimeOffset.Now, 174.51),
-                new CurrentStock("PZU",15,17.5,DateTimeOffset.Now, 174.52),
-                new CurrentStock("PKOBP",20,12.5,DateTimeOffset.Now, 174.53),
-                new CurrentStock("CDPR",52,999,DateTimeOffset.Now, 174.54),
-            };
+            var stocks = _stocksProvider.Current();
+            return stocks;
         }
 
         [HttpGet("history")]
-        public void History()
+        public Task<HistoryStock[]> History()
         {
+            var stocks = _stocksProvider.History();
+            return stocks;
         }
     }
 }

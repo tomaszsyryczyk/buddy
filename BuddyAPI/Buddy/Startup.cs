@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TS.Common;
 
 namespace Buddy
 {
@@ -22,6 +23,15 @@ namespace Buddy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: origins,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                    });
+            });
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -40,8 +50,12 @@ namespace Buddy
             // Register your own things directly with Autofac here. Don't
             // call builder.Populate(), that happens in AutofacServiceProviderFactory
             // for you.
+
+            builder.RegisterModule(new CommonModule());
             builder.RegisterModule(new MyApplicationModule());
         }
+
+        readonly string origins = "*";
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -56,6 +70,7 @@ namespace Buddy
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(origins);
 
             app.UseAuthorization();
 
