@@ -1,19 +1,35 @@
 <script>
     export let click;
     export let icon;
+    export let text;
+    export let error;
+    $: className = error? "btn-secondary" : "btn-primary";
 </script>
 
-<button class="btn" on:click="{click}" >    
+<button class="btn {className}" on:click="{click}" >    
+    {#if icon}
     <i class="{icon}"/>
+    {/if}
+    {#if text}
+        {text}
+    {/if}
 </button>
 
 <style>
-    .btn {
-        padding:0.5em 0.6em;
+
+    .btn-primary{
         background-color: var(--primary-color);
+    }
+
+    .btn-secondary{
+        background-color: var(--secondary-color);
+    }
+
+    .btn {
+        padding:0.3em 0.4em;
         color: white;
         margin: 5px;
-        font-size: 22px;
+        font-size: 1.3em;
         border: 0;
         border-radius: 0.3em;
         

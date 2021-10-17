@@ -19,20 +19,13 @@ namespace Buddy.Controllers
         {
             _mediateStockEvents = mediateStockEvents;
             _stocksProvider = stocksProvider;
-        }
+        }   
 
         [HttpPost]
-        public async Task<IActionResult> StockEvent(StockEvent stockEvent)
+        public async Task<IActionResult> StockEvent([FromBody]StockEvent stockEvent)
         {
-            try
-            {
-                await _mediateStockEvents.Persist(stockEvent);
-                return new OkResult();
-            }
-            finally
-            {
-                throw new InvalidOperationException();
-            }    
+            await _mediateStockEvents.Persist(stockEvent);
+            return new OkResult();
         }
 
         [HttpGet("current")]

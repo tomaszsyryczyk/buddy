@@ -1,35 +1,40 @@
 <script>
     import Button from "./../button/button.svelte";
     export let isOpen;
+    export let success;
     $: className = isOpen? "show" : "hidden";
 
     function toggleModal(){
-        isOpen = false;
+        isOpen = !isOpen;
     }
 
-    function closeModal(){
+    function closeModal(){       
+        console.log('close modal')
         var shadow = document.getElementById("shadow");
-        if(event.target === shadow)
+        if(event.target === shadow )
             toggleModal();
+        event.stopPropagation();
     }
 </script>
 
 
-<div id="shadow" class="shadow {className}" on:click="{closeModal}">
-    <div class="modal">
+<div id="shadow" class="shadow {className}" on:mousedown="{closeModal}">
+    <div id="modal" class="modal">
         <div class="row end-xs header">
             <div>
-                <Button icon="far fa-times-circle" click="{toggleModal}"/>
+                <Button error="true" icon="fas fa-times-circle" click="{toggleModal}"/>
             </div>
         </div>
     
-        <div class="content">
-        <slot>
-            
-        </slot>
+        <div class="row content">
+            <slot>
+                
+            </slot>
         </div>
-        <div class="footer">
-    
+        <div class="row end-xs footer">
+            <div>
+                <Button text="Save" icon="fas fa-check" click="{success}"/>
+            </div>
         </div>
     </div>
    
@@ -61,16 +66,19 @@
 
 .content {
     background-color: #222;
+    margin: 0;
 }
 
 .footer {
     border-radius: 0 0 0.5rem 0.5rem;    
-    padding: 1rem 1.5rem;
+     padding: 0.5rem;
     min-height: 1em;
     background-color: #393939;
+    margin: 0;
 }
 
 .header{
+     padding: 0.5rem;
     border-radius: 0.5rem 0.5rem 0 0;  
     min-height: 1em;
     background-color: #393939;

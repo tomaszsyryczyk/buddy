@@ -29,6 +29,8 @@ namespace Buddy
                     builder =>
                     {
                         builder.AllowAnyOrigin();
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyMethod();
                     });
             });
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Buddy.Events;
 using Buddy.Models;
@@ -27,6 +26,8 @@ namespace Buddy.Services
         {
             var current = new List<StockEvent>();
             var allStocks = await _mediateStockEvents.All();
+
+            
             
             return new CurrentStock[]
             {
