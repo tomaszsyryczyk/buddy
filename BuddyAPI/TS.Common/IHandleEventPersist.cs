@@ -13,4 +13,10 @@ namespace TS.Common
     {
         Task<T[]> All();
     }
+
+    public interface IHandleEventExecution<in T>
+        where T : Event
+    {
+        Task Execute(T toExecute);
+    }
 }

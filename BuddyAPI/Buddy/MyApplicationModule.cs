@@ -10,7 +10,7 @@ namespace Buddy
         {
             base.Load(builder);
             builder.RegisterEventSourcing(typeof(MyApplicationModule).Assembly);
-            builder.RegisterType<StocksProvider>().As<IStocksProvider>();
+            builder.RegisterType<StocksRepository>().As<IStocksRepository>();
         }
     }
 }

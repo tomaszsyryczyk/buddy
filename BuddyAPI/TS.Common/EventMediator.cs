@@ -7,9 +7,13 @@ namespace TS.Common
     {
         private readonly IHandleEventPersist<TEvent> _eventPersister;
         private readonly IHandleEventProvide<TEvent> _eventProvider;
+        private readonly IHandleEventExecution<TEvent> _eventExecutioner;
 
-        public EventMediator(IHandleEventPersist<TEvent> eventPersister, IHandleEventProvide<TEvent> eventProvider)
+        public EventMediator(IHandleEventPersist<TEvent> eventPersister, 
+            IHandleEventProvide<TEvent> eventProvider,
+            IHandleEventExecution<TEvent> eventExecutioner)
         {
+            _eventExecutioner = eventExecutioner;
             _eventProvider = eventProvider;
             _eventPersister = eventPersister;
         }
@@ -22,6 +26,11 @@ namespace TS.Common
         public async Task<TEvent[]> All()
         {
             return await _eventProvider.All();
+        }
+
+        public async Task Execute(TEvent toExecute)
+        {
+            await _eventExecutioner.Execute(toExecute);
         }
     }
 }

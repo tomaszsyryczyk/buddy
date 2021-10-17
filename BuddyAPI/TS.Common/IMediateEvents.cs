@@ -7,5 +7,6 @@ namespace TS.Common
     {
         Task Persist(TEvent persistEvent);
         Task<TEvent[]> All();
+        Task Execute(TEvent toExecute);
     }
 }

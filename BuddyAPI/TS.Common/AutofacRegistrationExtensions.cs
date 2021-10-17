@@ -15,6 +15,10 @@ namespace TS.Common
             builder.RegisterAssemblyTypes(assembly)
                 .AsClosedTypesOf(typeof(IHandleEventProvide<>))
                 .AsImplementedInterfaces();
+
+            builder.RegisterAssemblyTypes(assembly)
+                .AsClosedTypesOf(typeof(IHandleEventExecution<>))
+                .AsImplementedInterfaces();
         }
     }
 }

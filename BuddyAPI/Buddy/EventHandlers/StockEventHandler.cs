@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Buddy.Events;
 using TS.Common;
@@ -22,7 +23,7 @@ namespace Buddy.EventHandlers
 
         public async Task<StockEvent[]> All()
         {
-            return _events.ToArray();
+            return _events.OrderBy(x => x.When).ToArray();
         }
     }
 }
