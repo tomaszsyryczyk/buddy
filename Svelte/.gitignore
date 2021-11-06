@@ -2,3 +2,4 @@
 /public/build/
 /release-builds/
 .DS_Store
+/dist/
