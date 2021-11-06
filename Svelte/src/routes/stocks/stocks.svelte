@@ -1,43 +1,30 @@
-<script> 
+<script>
     import StockType from "./stocktype.svelte";
 </script>
 
-
-
-
-<div class="row around-xs">
-    <div class="col-xs-4">
-        <div class="box">
-            <div class="row around-xs">
-                <div class="col-xs-1">
-                    <div class="box">
-                        <StockType text="Current" url="/stocks/current"/>
-                    </div>
-                </div>
-                <div class="col-xs-1">
-                    <div class="box">
-                        <StockType text="History" url="/stocks/history"/>
-                    </div>
-                </div>               
-            </div>
-        </div>
+<div class="stocks">
+    <div class="stock-types">
+        <div></div>
+        <StockType text="Current" url="/stocks/current" />
+        <StockType text="History" url="/stocks/history" />       
+    </div>
+    <div class="stock-content">
+        <slot />
     </div>
 </div>
 
-
-<div class="row center-xs table">
-    <div class="col-xs-10">
-        <div class="box">
-            <slot>
-            </slot>      
-        </div>
-    </div>
-</div>
 
 <style>
-   
+    .stocks {
+        display: grid;
+		grid-gap: 1em;
+		grid-template-columns: 1fr;
+        grid-auto-rows: minmax(min-content, max-content);
+		margin: 0;
+		height: 100%;
+    }
 
-    .table {
-        padding-top: 1em;
+    .stock-types{
+        place-self: center
     }
 </style>

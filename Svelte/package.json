@@ -35,6 +35,8 @@
     }
   },
   "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
     "start": "electron .",
     "dist": "electron-builder",
     "postinstall": "install-app-deps"
