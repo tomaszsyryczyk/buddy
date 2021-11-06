@@ -10,7 +10,8 @@ const createWindow = () => {
         height: height / 1.25,
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        frame: false
     });
 
     window.loadFile('public/index.html');
