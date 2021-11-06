@@ -3,6 +3,8 @@
     import Header from "./currentheader.svelte";
     import Row from "./currentrow.svelte";
     import Stocks from "./../stocks.svelte";
+    import Button from "./../../../controls/button/button.svelte";
+     import AddStockModal from "./../addStockModal/addStockModal.svelte";
     let currentStocks = [];
 
     let columnNames = ['Name', 'Ilość', 'zł/akcja', 'Marża', 'Data', 'na 0', 'Aktualna', '%', 'Sprzedaż', 'Zysk'];
@@ -17,17 +19,30 @@
                 currentStocks = response.data;
             });
     })
+
+    let modalOpen = false;
+
+    function toggleModal(){
+        modalOpen = !modalOpen;
+    }
 </script>
+
+<AddStockModal bind:modalOpen={modalOpen} />
 
 <Stocks>
     <div class="table">
+        <div class="row">
+            <div class="col-xs-offset-11 col-xs-1">
+                <div class="box btn">
+                    <Button click={toggleModal} icon="fas fa-plus" />
+                </div>
+            </div>
+        </div>
         <Header values="{columnNames}"/>     
         {#each currentStocks as row}
             <Row data="{row}" mapper={mapper} />
         {/each}   
-        
     </div>
-    
 </Stocks>
 
 
@@ -42,4 +57,7 @@
   flex: 1 1 auto;
   }
 
+ .btn {
+        justify-content: flex-start;
+    }
 </style>
