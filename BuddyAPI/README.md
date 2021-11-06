@@ -1,6 +1,6 @@
 ## Build application
 
-First you have to build project. Project is inside ./BuddyAPI/Buddy
+First you have to build project. Project is inside ./BuddyAPI
 
 ```bash
 dotnet build
