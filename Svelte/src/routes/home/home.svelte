@@ -1,1 +1,1 @@
-testowanie czy to wgle działa jakkolwiek xD
+testowanie czy to wgle działa jakkolwiek xDD

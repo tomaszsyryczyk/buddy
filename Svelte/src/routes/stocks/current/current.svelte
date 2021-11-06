@@ -25,7 +25,9 @@
         {#each currentStocks as row}
             <Row data="{row}" mapper={mapper} />
         {/each}   
+        
     </div>
+    
 </Stocks>
 
 
