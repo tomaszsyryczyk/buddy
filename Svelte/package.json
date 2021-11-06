@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "electron ."    
+    "start": "electron start-electron.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -19,6 +19,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
     "sirv-cli": "^1.0.0",
     "svelte-spa-router": "^3.2.0"
   }

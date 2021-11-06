@@ -35,7 +35,7 @@
 
 <Menu {menus} />
 
-<div class="content">
+<div class="content"> 
 	<Router {routes} />
 </div>
 
