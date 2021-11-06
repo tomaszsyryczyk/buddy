@@ -13,7 +13,7 @@ dotnet build
 
 
 ```bash
-dotnet run
+dotnet run --project Buddy
 ```
 
 ...then start [Rollup](https://localhost:5001/swagger/index.html):
