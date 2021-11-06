@@ -1,6 +1,7 @@
 const { app, BrowserWindow, screen } = require('electron');
 require('electron-reload')(__dirname);
 
+
 const createWindow = () => {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
