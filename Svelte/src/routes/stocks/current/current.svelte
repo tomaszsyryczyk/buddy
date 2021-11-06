@@ -4,7 +4,7 @@
     import Row from "./currentrow.svelte";
     import Stocks from "./../stocks.svelte";
     import Button from "./../../../controls/button/button.svelte";
-     import AddStockModal from "./../addStockModal/addStockModal.svelte";
+    import AddStockModal from "./../addStockModal/addStockModal.svelte";
     let currentStocks = [];
 
     let columnNames = ['Name', 'Ilość', 'zł/akcja', 'Marża', 'Data', 'na 0', 'Aktualna', '%', 'Sprzedaż', 'Zysk'];
