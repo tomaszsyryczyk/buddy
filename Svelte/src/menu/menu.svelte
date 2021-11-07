@@ -82,7 +82,7 @@
 	.nav-main {
 		position: fixed;
 		height: 100%;
-		top: 0;
+		top: 2em;
 		left: 0;
 		background-color: #222222;
 		padding: 0;

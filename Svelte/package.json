@@ -1,16 +1,51 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
+  "name": "Buddy",  
+  "description": "Simple program to organize yourself.",
+  "version": "1.0.2",
+  "repository" : "https://github.com/tomaszsyryczyk/buddy",
   "private": true,
+  "main" : "./start-electron.js",
+  "author" : {
+    "name" : "TS"
+  },
+  "build": {
+    "appId": "yourappid",
+    "directories": {
+      "output" : "release"
+    },
+    "mac": {
+      "category": "your.app.category.type"
+    },   
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "assets/icon.png"
+    },
+    "nsis":{
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory" : true,
+      "runAfterFinish": false,
+      "createDesktopShortcut": false
+    }
+  },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "electron start-electron.js"
+    "start": "electron .",
+    "dist": "electron-builder",
+    "postinstall": "install-app-deps"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "electron": "^15.3.0",
+    "electron-builder": "^22.13.1",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
