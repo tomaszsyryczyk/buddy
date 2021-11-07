@@ -1,5 +1,6 @@
 const { app, BrowserWindow, screen } = require('electron');
-require('electron-reload')(__dirname);
+const path = require("path");
+require('electron-reload')(app.getAppPath());
 
 
 const createWindow = () => {
@@ -9,7 +10,9 @@ const createWindow = () => {
         width: width / 1.25,
         height: height / 1.25,
         webPreferences: {
-            nodeIntegration: true
+            preload: path.join(app.getAppPath(), "preload.js"),
+            nableRemoteModule: false,
+            contextIsolation: true
         },
         frame: false
     });

@@ -1,20 +1,33 @@
 <script>
+    function minimizeWindow() {
+        window.minimizeWindow();
+    }
+
+    function maxUnmaxWindow() {
+        window.maxUnmaxWindow();
+        isWindowMaximized = window.isWindowMaximized();
+    }
+
+    function closeWindow(){
+        window.closeWindow();
+    }
+
+    let isWindowMaximized = false;
+
+    $: maxUnmaxClass = isWindowMaximized? "fa-window-restore": "fa-square";
 </script>
 
 <div class="main-bar">
     <div class="app-name">BUDDY</div>
     <div class="app-version">v.1.1.0</div>
-    
-    <div class="btn">
+    <div />
+    <div class="btn" on:click="{minimizeWindow}">
         <i class="far fa-window-minimize" />
     </div>
-    <div class="btn">
-        <i class="far fa-square" />
+    <div class="btn" on:click="{maxUnmaxWindow}">
+        <i class="far {maxUnmaxClass}" />
     </div>
-    <div class="btn">
-        <i class="fas fa-window-restore" />
-    </div>
-    <div class="btn btn-close ">
+    <div class="btn btn-close" on:click="{closeWindow}">
         <i class="fas fa-times" />
     </div>
 </div>
@@ -22,10 +35,15 @@
 <style>
     .main-bar {
         display: inline-grid;
-        grid-template-columns: minmax(min-content, max-content) 1fr repeat(4, 3em);
+        grid-template-columns: repeat(2, minmax(min-content, max-content)) 1fr repeat(
+                3,
+                3em
+            );
         width: 100%;
         align-items: center;
         height: 2em;
+        -webkit-user-select: none;
+        -webkit-app-region: drag;
     }
 
     .app-name {
@@ -44,6 +62,7 @@
     }
 
     .btn {
+        -webkit-app-region: no-drag;
         background-color: transparent;
         cursor: pointer;
         height: 2em;
