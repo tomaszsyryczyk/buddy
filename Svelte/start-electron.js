@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen, ipcMain,  Menu, Tray } = require('electron');
+const { app, BrowserWindow, screen, ipcMain, Menu, Tray } = require('electron');
 const path = require("path");
 require('electron-reload')(app.getAppPath());
 
@@ -86,4 +86,9 @@ let window = null;
 
 app.whenReady().then(createWindow)
 app.on('window-all-closed', () => app.quit());
+
+// in your main process, having Electron's `app` imported
+app.on ("certificate-error", (event, webContents, url, error, cert, callback) => {
+     callback (true);     
+});
 

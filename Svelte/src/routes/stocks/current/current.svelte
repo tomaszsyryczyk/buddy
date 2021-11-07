@@ -5,6 +5,7 @@
     import Stocks from "./../stocks.svelte";
     import Button from "./../../../controls/button/button.svelte";
     import AddStockModal from "./../addStockModal/addStockModal.svelte";
+    import Table from "./../../../controls/table/table.svelte";
     let currentStocks = [];
 
     let columnNames = ['Name', 'Ilość', 'zł/akcja', 'Marża', 'Data', 'na 0', 'Aktualna', '%', 'Sprzedaż', 'Zysk'];
@@ -25,24 +26,30 @@
     function toggleModal(){
         modalOpen = !modalOpen;
     }
+
+    function rowMapper(){
+        return [
+            new column('Nazwa', (row) => row.name),
+            new column('Ilość', (row) => row.count),
+            new column('zł/akcja', (row) => row.price),
+            new column('Marża', (row) => row.fee),
+        ]
+
+    }
+
+    function column(name, getValue){
+        return {
+            name:name,
+            getValue: getValue
+        }
+    }
+
 </script>
 
 <AddStockModal bind:modalOpen={modalOpen} />
 
 <Stocks>
-    <div class="row">
-             <div class="col-xs-offset-11 col-xs-1">
-                     <div class="box btn">
-                          <Button click={toggleModal} icon="fas fa-plus" />
-                        </div>
-                   </div>
-              </div>
-          <div class="table">
-          <Header values="{columnNames}"/>     
-           {#each currentStocks as row}
-              <Row data="{row}" mapper={mapper} />
-           {/each}   
-        </div>
+    <Table data={currentStocks} rowMappers={rowMapper()} />    
 </Stocks>
 
 

@@ -21,7 +21,7 @@
 		new menuItem("Stocks", "/stocks", "fa-chart-line"),
 	];
 
-	function menuItem(name, url, icon) {
+	function menuItem(name, url, icon) {		
 		var self = this;
 		self.name = name;
 		self.url = url;
