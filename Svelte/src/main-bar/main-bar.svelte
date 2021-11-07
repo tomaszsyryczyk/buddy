@@ -1,16 +1,15 @@
 <script>
     function minimizeWindow() {
-        window.minimizeWindow();
+        window.electron.minimalize();
     }
 
     function maxUnmaxWindow() {
-        window.maxUnmaxWindow();
-        isWindowMaximized = window.isWindowMaximized();
+        isWindowMaximized = window.electron.maxUnmax();
     }
 
     function closeWindow(){
-        window.closeWindow();
-    }
+        window.electron.close();
+    } 
 
     let isWindowMaximized = false;
 
