@@ -15,7 +15,7 @@
 
 <style>
     .btn {
-        background-color: var(--primary-color);
+        background-color: var(--secondary-color);
         padding: 0.3em 0.4em;
         color: white;
         margin: 5px;
@@ -28,7 +28,7 @@
     }
 
     .btn:hover {
-        background-color: var(--primary-color-shadow);
+        background-color: var(--secondary-color-shadow);
     }
 
     .btn:active {
