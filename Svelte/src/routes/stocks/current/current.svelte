@@ -20,20 +20,21 @@
 
     let modalOpen = false;
 
-    function rowMapper(){
+    function mappers(){
         return [
             new column('Nazwa', (row) => row.name),
             new column('Ilość', (row) => row.count),
             new column('zł/akcja', (row) => row.price),
             new column('Marża', (row) => row.fee),
+            new column('Test', (row) => "<div class=\"test\">does it work?</div>"),
         ]
 
     }
 
     function column(name, getValue){
         return {
-            name:name,
-            getValue: getValue
+            columnName: name,
+            columnValue: getValue
         }
     }
 
@@ -42,7 +43,7 @@
 <AddStockModal bind:modalOpen={modalOpen} />
 
 <Stocks>
-    <Table data={currentStocks} rowMappers={rowMapper()} />    
+    <Table rows={currentStocks} rowMappers={mappers()} />    
 </Stocks>
 
 
