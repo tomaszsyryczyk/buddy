@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Buddy.Events;
 using Buddy.Models;
-using TS.Common;
 
-namespace Buddy.Services
+namespace Buddy.Events.Stock
 {
-    public interface IStocksRepository
+    public interface IStockRepository
     {
         Task<CurrentStock[]> Current();
         Task<HistoryStock[]> History();
         void Add(CurrentStock stock);
     }
 
-    public class StocksRepository : IStocksRepository
+    public class StockRepository : IStockRepository
     {
         private static List<CurrentStock> _currentStocks;
         private static List<HistoryStock> _historyStocks;
 
-        public StocksRepository()
+        public StockRepository()
         {
             if(_currentStocks == null)
                 _currentStocks = new List<CurrentStock>();
