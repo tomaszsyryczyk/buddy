@@ -7,7 +7,7 @@ namespace TS.Common
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-            builder.RegisterGeneric(typeof(EventMediator<>)).As(typeof(IMediateEvents<>));
+            builder.RegisterGeneric(typeof(EventProcessor<>)).As(typeof(IProcessEvents<>));
         }
     }
 }

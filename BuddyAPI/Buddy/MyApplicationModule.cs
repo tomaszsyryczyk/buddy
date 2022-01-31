@@ -1,5 +1,6 @@
 ﻿using Autofac;
-using Buddy.Services;
+using Buddy.Events.Stock;
+using Buddy.Events.Wallet;
 using TS.Common;
 
 namespace Buddy
@@ -10,7 +11,8 @@ namespace Buddy
         {
             base.Load(builder);
             builder.RegisterEventSourcing(typeof(MyApplicationModule).Assembly);
-            builder.RegisterType<StocksRepository>().As<IStocksRepository>();
+            builder.RegisterType<StockRepository>().As<IStockRepository>();
+            builder.RegisterType<WalletRepository>().As<IWalletRepository>();
         }
     }
 }

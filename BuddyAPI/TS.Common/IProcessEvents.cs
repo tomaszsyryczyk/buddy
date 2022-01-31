@@ -2,11 +2,10 @@
 
 namespace TS.Common
 {
-    public interface IMediateEvents<TEvent>
+    public interface IProcessEvents<TEvent>
     where TEvent : Event
     {
-        Task Persist(TEvent persistEvent);
+        Task Process(TEvent persistEvent);
         Task<TEvent[]> All();
-        Task Execute(TEvent toExecute);
     }
 }

@@ -1,17 +1,16 @@
 ﻿using System.Threading.Tasks;
-using Buddy.Events;
 using Buddy.Models;
 using TS.Common;
 
-namespace Buddy.Services
+namespace Buddy.Events.Stock
 {
-    public class StocksEventExecutor : IHandleEventExecution<StockEvent>
+    public class StockEventExecutor : IHandleEventExecution<StockEvent>
     {
-        private readonly IStocksRepository _stocksRepository;
+        private readonly IStockRepository _stockRepository;
 
-        public StocksEventExecutor(IStocksRepository stocksRepository)
+        public StockEventExecutor(IStockRepository stockRepository)
         {
-            _stocksRepository = stocksRepository;
+            _stockRepository = stockRepository;
         }
 
         public async Task Execute(StockEvent toExecute)
@@ -25,8 +24,6 @@ namespace Buddy.Services
                     AddSell(toExecute);
                     break;
             }
-
-
         }
 
         private void AddSell(StockEvent toExecute)
@@ -36,7 +33,7 @@ namespace Buddy.Services
 
         private void AddBuy(StockEvent toExecute)
         {
-            _stocksRepository.Add(new CurrentStock(toExecute.Name,toExecute.Count,toExecute.Price,toExecute.When,default(int)));
+            _stockRepository.Add(new CurrentStock(toExecute.Name,toExecute.Count,toExecute.Price,toExecute.When,default(int)));
         }
     }
 }

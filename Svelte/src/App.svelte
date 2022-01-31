@@ -6,22 +6,23 @@
 	import Menu from "./menu/menu.svelte";
 	import Router from "svelte-spa-router";
 	import MainBar from "./main-bar/main-bar.svelte";
+	import Wallet from "./routes/wallet/wallet.svelte";
 	const routes = {
 		"/": Home,
 		"/stocks/current": CurrentStocks,
 		"/stocks": CurrentStocks,
 		"/stocks/history": HistoryStocks,
+		"/wallet": Wallet,
 		"*": NotFound,
 	};
 
 	const menus = [
 		new menuItem("HOME", "/", "fa-home"),
 		new menuItem("Stocks", "/stocks", "fa-chart-line"),
-		new menuItem("HOME", "/", "fa-home"),
-		new menuItem("Stocks", "/stocks", "fa-chart-line"),
+		new menuItem("Łolet", "/wallet", "fa-wallet"),
 	];
 
-	function menuItem(name, url, icon) {		
+	function menuItem(name, url, icon) {
 		var self = this;
 		self.name = name;
 		self.url = url;
@@ -36,7 +37,7 @@
 
 <div class="app">
 	<div class="main-bar">
-		<MainBar />	
+		<MainBar />
 	</div>
 
 	<div class="nav">

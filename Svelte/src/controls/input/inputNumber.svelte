@@ -3,7 +3,7 @@
     export let name;
 </script>
 
-<input bind:value={value} {name} />
+<input type="number" bind:value={value} {name} />
 
 <style>
 

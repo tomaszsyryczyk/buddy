@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Buddy.Events;
 using TS.Common;
 
-namespace Buddy.EventHandlers
+namespace Buddy.Events.Stock
 {
     public class StockEventHandler : IHandleEventPersist<StockEvent>, IHandleEventProvide<StockEvent>
     {
