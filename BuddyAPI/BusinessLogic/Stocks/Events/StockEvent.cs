@@ -10,10 +10,4 @@ namespace BusinessLogic.Stocks.Events
         public StockEventType Type { get; set; }
         public double Fee { get; set; }
     }
-
-    public enum StockEventType
-    {
-        Buy = 0,
-        Sell = 1
-    }
 }

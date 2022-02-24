@@ -8,5 +8,6 @@ namespace TS.Common
         Task Persist(TEvent persistEvent);
         Task<TEvent[]> GetAll();
         Task Execute(TEvent toExecute);
+        Task Validate(TEvent toValidate);
     }
 }

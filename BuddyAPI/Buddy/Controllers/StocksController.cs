@@ -12,19 +12,16 @@ namespace Buddy.Controllers
     public class StocksController : BuddyControllerBase
     {
         private readonly IStocksRepository _stocksRepository;
-        private readonly IMediateEvents<StockEvent> _mediateStockEvents;
 
-        public StocksController(IMediateEvents<StockEvent> mediateStockEvents, IStocksRepository stocksRepository)
+        public StocksController(IProcessEvent processEvent, IStocksRepository stocksRepository) : base(processEvent)
         {
-            _mediateStockEvents = mediateStockEvents;
             _stocksRepository = stocksRepository;
         }   
 
         [HttpPost]
         public async Task<IActionResult> StockEvent([FromBody]StockEvent stockEvent)
         {
-            await _mediateStockEvents.Persist(stockEvent);
-            await _mediateStockEvents.Execute(stockEvent);
+            await ProcessEvent.Process(stockEvent);
             return new OkResult();
         }
 

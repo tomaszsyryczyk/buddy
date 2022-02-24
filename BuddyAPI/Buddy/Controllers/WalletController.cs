@@ -1,8 +1,7 @@
-﻿using BusinessLogic.Stocks;
-using BusinessLogic.Stocks.Events;
+﻿using System.Threading.Tasks;
+using BusinessLogic.Wallet.Events;
 using Microsoft.AspNetCore.Mvc;
 using TS.Common;
-
 
 namespace Buddy.Controllers
 {
@@ -10,11 +9,16 @@ namespace Buddy.Controllers
     [Route("api/wallet")]
     public class WalletController : BuddyControllerBase
     {
-        //private readonly IMediateEvents<StockEvent> _mediateStockEvents;
 
-        public WalletController()
+        public WalletController(IProcessEvent processEvent) : base(processEvent)
         {
         }
 
+        [HttpPut]
+        public async Task<IActionResult> AddEntry([FromBody]WalletRecordEvent recordEvent)
+        {
+            await ProcessEvent.Process(recordEvent);
+            return new OkResult();
+        }
     }
 }

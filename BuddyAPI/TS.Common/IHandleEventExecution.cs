@@ -2,9 +2,9 @@
 
 namespace TS.Common
 {
-    public interface IHandleEventPersist<in T>
+    public interface IHandleEventExecution<in T>
         where T : Event
     {
-        Task Persist(T persistEvent);
+        Task Execute(T toExecute);
     }
 }

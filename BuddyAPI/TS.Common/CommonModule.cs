@@ -8,6 +8,7 @@ namespace TS.Common
         {
             base.Load(builder);
             builder.RegisterGeneric(typeof(EventMediator<>)).As(typeof(IMediateEvents<>));
+            builder.RegisterType<EventProcessor>().As<IProcessEvent>();
         }
     }
 }
