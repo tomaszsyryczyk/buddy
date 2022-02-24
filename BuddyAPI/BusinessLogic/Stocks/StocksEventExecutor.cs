@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Buddy.Events;
-using Buddy.Models;
+using BusinessLogic.Stocks.Events;
+using BusinessLogic.Stocks.Models;
 using TS.Common;
 
-namespace Buddy.Services
+namespace BusinessLogic.Stocks
 {
-    public class StocksEventExecutor : IHandleEventExecution<StockEvent>
+    internal class StocksEventExecutor : IHandleEventExecution<StockEvent>
     {
         private readonly IStocksRepository _stocksRepository;
 
@@ -25,8 +25,6 @@ namespace Buddy.Services
                     AddSell(toExecute);
                     break;
             }
-
-
         }
 
         private void AddSell(StockEvent toExecute)
@@ -36,7 +34,7 @@ namespace Buddy.Services
 
         private void AddBuy(StockEvent toExecute)
         {
-            _stocksRepository.Add(new CurrentStock(toExecute.Name,toExecute.Count,toExecute.Price,toExecute.When,default(int)));
+            _stocksRepository.Add(new CurrentStock(toExecute.Name, toExecute.Count, toExecute.Price, toExecute.When, default(int)));
         }
     }
 }

@@ -8,4 +8,8 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TS.Common\TS.Common.csproj" />
+  </ItemGroup>
+
 </Project>

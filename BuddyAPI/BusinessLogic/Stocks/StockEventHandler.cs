@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Buddy.Events;
+using BusinessLogic.Stocks.Events;
 using TS.Common;
 
-namespace Buddy.EventHandlers
+namespace BusinessLogic.Stocks
 {
-    public class StockEventHandler : IHandleEventPersist<StockEvent>, IHandleEventProvide<StockEvent>
+    internal class StockEventHandler : IHandleEventPersist<StockEvent>, IHandleEventProvide<StockEvent>
     {
         private static List<StockEvent> _events;
 

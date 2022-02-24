@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Buddy.Events;
-using Buddy.Models;
-using Buddy.Services;
+using BusinessLogic.Stocks;
+using BusinessLogic.Stocks.Events;
+using BusinessLogic.Stocks.Models;
 using Microsoft.AspNetCore.Mvc;
 using TS.Common;
 

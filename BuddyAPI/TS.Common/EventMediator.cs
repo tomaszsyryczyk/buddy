@@ -23,7 +23,7 @@ namespace TS.Common
             await _eventPersister.Persist(persistEvent);
         }
 
-        public async Task<TEvent[]> All()
+        public async Task<TEvent[]> GetAll()
         {
             return await _eventProvider.All();
         }

@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Buddy.Events;
-using Buddy.Models;
-using TS.Common;
+using BusinessLogic.Stocks;
+using BusinessLogic.Stocks.Models;
 
-namespace Buddy.Services
+namespace DataLayer
 {
-    public interface IStocksRepository
-    {
-        Task<CurrentStock[]> Current();
-        Task<HistoryStock[]> History();
-        void Add(CurrentStock stock);
-    }
-
     public class StocksRepository : IStocksRepository
     {
         private static List<CurrentStock> _currentStocks;
@@ -22,7 +13,7 @@ namespace Buddy.Services
 
         public StocksRepository()
         {
-            if(_currentStocks == null)
+            if (_currentStocks == null)
                 _currentStocks = new List<CurrentStock>();
 
             if (_historyStocks == null)

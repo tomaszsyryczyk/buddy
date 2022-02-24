@@ -1,5 +1,6 @@
 ﻿using Autofac;
-using Buddy.Services;
+using BusinessLogic.Stocks;
+using DataLayer;
 using TS.Common;
 
 namespace Buddy
@@ -9,7 +10,7 @@ namespace Buddy
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-            builder.RegisterEventSourcing(typeof(MyApplicationModule).Assembly);
+            builder.RegisterEventHandlers(typeof(MyApplicationModule).Assembly);
             builder.RegisterType<StocksRepository>().As<IStocksRepository>();
         }
     }

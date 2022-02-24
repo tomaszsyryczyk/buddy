@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Buddy.Models
+namespace BusinessLogic.Stocks.Models
 {
     public class CurrentStock
     {

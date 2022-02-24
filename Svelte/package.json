@@ -1,21 +1,21 @@
 {
-  "name": "Buddy",  
+  "name": "Buddy",
   "description": "Simple program to organize yourself.",
   "version": "1.0.2",
-  "repository" : "https://github.com/tomaszsyryczyk/buddy",
+  "repository": "https://github.com/tomaszsyryczyk/buddy",
   "private": true,
-  "main" : "./start-electron.js",
-  "author" : {
-    "name" : "TS"
+  "main": "./start-electron.js",
+  "author": {
+    "name": "TS"
   },
   "build": {
     "appId": "yourappid",
     "directories": {
-      "output" : "release"
+      "output": "release"
     },
     "mac": {
       "category": "your.app.category.type"
-    },   
+    },
     "linux": {
       "target": [
         "AppImage",
@@ -26,10 +26,10 @@
       "target": "NSIS",
       "icon": "assets/icon.png"
     },
-    "nsis":{
+    "nsis": {
       "oneClick": false,
       "perMachine": false,
-      "allowToChangeInstallationDirectory" : true,
+      "allowToChangeInstallationDirectory": true,
       "runAfterFinish": false,
       "createDesktopShortcut": false
     }
@@ -44,6 +44,9 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
+    "@smui/button": "^6.0.0-beta.14",
+    "@smui/common": "^6.0.0-beta.14",
+    "@smui/textfield": "^6.0.0-beta.14",
     "electron": "^15.3.0",
     "electron-builder": "^22.13.1",
     "rollup": "^2.3.4",

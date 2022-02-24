@@ -6,7 +6,7 @@ namespace TS.Common
     where TEvent : Event
     {
         Task Persist(TEvent persistEvent);
-        Task<TEvent[]> All();
+        Task<TEvent[]> GetAll();
         Task Execute(TEvent toExecute);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using TS.Common;
 
-namespace Buddy.Events
+namespace BusinessLogic.Stocks.Events
 {
     public class StockEvent : Event
     {
