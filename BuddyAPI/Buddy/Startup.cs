@@ -1,5 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using BusinessLogic;
+using DataLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -55,6 +57,8 @@ namespace Buddy
 
             builder.RegisterModule(new CommonModule());
             builder.RegisterModule(new MyApplicationModule());
+            builder.RegisterModule(new BusinessLogicModule());
+            builder.RegisterModule(new DataLayerModule());
         }
 
         readonly string origins = "*";

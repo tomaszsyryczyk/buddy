@@ -3,22 +3,24 @@
 	import HistoryStocks from "./routes/stocks/history/history.svelte";
 	import CurrentStocks from "./routes/stocks/current/current.svelte";
 	import NotFound from "./routes/NotFound/notfound.svelte";
+	import Wallet from "./routes/wallet/wallet.svelte";
 	import Menu from "./menu/menu.svelte";
 	import Router from "svelte-spa-router";
 	import MainBar from "./main-bar/main-bar.svelte";
 	const routes = {
-		"/": Home,
+		"/": Wallet,
+		"/home": Home,
 		"/stocks/current": CurrentStocks,
 		"/stocks": CurrentStocks,
 		"/stocks/history": HistoryStocks,
+		"/wallet": Wallet,
 		"*": NotFound,
 	};
 
 	const menus = [
-		new menuItem("HOME", "/", "fa-home"),
-		new menuItem("Stocks", "/stocks", "fa-chart-line"),
-		new menuItem("HOME", "/", "fa-home"),
-		new menuItem("Stocks", "/stocks", "fa-chart-line"),
+		new menuItem("Wallet", "/wallet", "fa-home"),
+		new menuItem("HOME", "/home", "fa-home"),
+		new menuItem("Stocks", "/stocks", "fa-chart-line"),		
 	];
 
 	function menuItem(name, url, icon) {		

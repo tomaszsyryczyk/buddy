@@ -1,0 +1,1 @@
+tutaj jest podsumowanie

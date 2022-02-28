@@ -11,9 +11,9 @@ namespace TS.Common
 
     public class EventProcessor : IProcessEvent
     {
-        private readonly IContainer _container;
+        private readonly IComponentContext _container;
 
-        public EventProcessor(IContainer container)
+        public EventProcessor(IComponentContext container)
         {
             _container = container;
         }
