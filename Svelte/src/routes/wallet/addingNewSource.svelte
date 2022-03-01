@@ -4,7 +4,8 @@
     import Button, { Label, Icon } from "@smui/button";
     import Select, { Option } from "@smui/select";
     import Textfield from "@smui/textfield";
-    let sourceTypes = ["Portfel", "Konto"];
+    import {sourceTypes} from "./consts.svelte";
+    
     let sourceValue = "";
     let name = "";
     export let saveAction;

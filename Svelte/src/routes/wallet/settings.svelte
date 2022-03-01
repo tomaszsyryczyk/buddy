@@ -4,28 +4,45 @@
     import DataTable, { Head, Body, Row, Cell } from "@smui/data-table";
     import Button, { Label, Icon } from "@smui/button";
     import NewSource from "./addingNewSource.svelte";
+
+    import TestAsdf from "./../../api/api.svelte";
+
     let isAddNewOpen = false;
     $: sources = [];
     onMount(async () => {
-        axios('https://localhost:5001/api/wallet/source/list')
-            .then(function (response) {
-                sources = response.data.map(row);
-            });
+        axios("https://localhost:5001/api/wallet/source/list").then(function (
+            response
+        ) {
+            sources = response.data.map((x) => new row(x));
+        });
     });
-    function row(data){
+    function row(data) {
         var self = this;
         self.id = data.id;
         self.name = data.name;
-        self.type = data.type;        
+        self.type = data.type;
+        self.edit = function () {
+            editSource(self);
+        };
+        self.delete = function () {
+            removeSource(self);
+        };
         return self;
     }
 
     function openForNewModal() {
         isAddNewOpen = !isAddNewOpen;
-    };
+        TestAsdf();
+    }
 
-    function edit(source) {debugger;};
-    function remove(source) {debugger;};
+    function editSource(data) {
+        console.log(data);
+        debugger;
+    }
+    function removeSource(data) {
+        console.log(data);
+        debugger;
+    }
 </script>
 
 <div class="accordion-container">
@@ -48,19 +65,18 @@
                         {#each sources as source}
                             <Row>
                                 <Cell hidden>source.id</Cell>
-                                <Cell>source.type</Cell>
-                                <Cell>source.name</Cell>
+                                <Cell>{source.type}</Cell>
+                                <Cell>{source.name}</Cell>
                                 <Cell>
-                                    <Button on:click={(source) => edit(source)}>
+                                    <Button on:click={source.edit()}>
                                         <Label>Edytuj</Label>
                                     </Button>
-                                    <Button on:click={(source) => remove(source)}>
+                                    <Button on:click={source.delete()}>
                                         <Label>Usuń</Label>
                                     </Button>
                                 </Cell>
                             </Row>
                         {/each}
-                        
                     </Body>
                 </DataTable>
                 <Button on:click={() => openForNewModal()}>
