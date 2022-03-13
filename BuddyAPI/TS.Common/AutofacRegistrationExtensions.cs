@@ -20,10 +20,10 @@ namespace TS.Common
                 .AsImplementedInterfaces();
         }
 
-        public static void RegisterRepositoriesByNameConvention(this ContainerBuilder builder, Assembly assembly)
+        public static void RegisterByNameConvention(this ContainerBuilder builder, Assembly assembly, string name)
         {
             builder.RegisterAssemblyTypes(assembly)
-                          .Where(x => x.Name.EndsWith("Repository"))
+                          .Where(x => x.Name.EndsWith(name))
                           .AsImplementedInterfaces();
         }
     }

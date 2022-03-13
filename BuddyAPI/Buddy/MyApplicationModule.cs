@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using BusinessLogic.Stocks;
-using DataLayer;
+using DataLayer.Stocks;
 using TS.Common;
 
 namespace Buddy

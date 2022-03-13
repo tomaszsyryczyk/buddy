@@ -9,8 +9,8 @@ namespace DataLayer.Events
         protected override void Load(ContainerBuilder builder)
         {
             var assembly = typeof(DataLayerEventModule).Assembly;
-            base.Load(builder);
-            builder.RegisterRepositoriesByNameConvention(assembly);
+            base.Load(builder); 
+            builder.RegisterByNameConvention(assembly, "EventHandler");
             builder.Register(context => new Work(context.Resolve<EventDbContext>())).As<IEventWork>()
                 .InstancePerLifetimeScope();
         }

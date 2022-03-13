@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using BusinessLogic.Stocks;
 using BusinessLogic.Stocks.Models;
 
-namespace DataLayer
+namespace DataLayer.Stocks
 {
     public class StocksRepository : IStocksRepository
     {

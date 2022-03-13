@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic.Wallet.Events;
+using Microsoft.EntityFrameworkCore;
 using TS.Common;
 
-namespace DataLayer.Events
+namespace DataLayer.Events.Wallet
 {
     internal class SourceEventHandler :
         IHandleEventPersist<AddSourceEvent>,
@@ -14,39 +14,41 @@ namespace DataLayer.Events
         IHandleEventProvide<EditSourceEvent>,
         IHandleEventProvide<DeleteSourceEvent>
     {
+        private readonly EventDbContext _dbContext;
 
-        private static readonly List<AddSourceEvent> AddEvents = new List<AddSourceEvent>();
-        private static readonly List<EditSourceEvent> EditEvents = new List<EditSourceEvent>();
-        private static readonly List<DeleteSourceEvent> DeleteEvents = new List<DeleteSourceEvent>();
+        public SourceEventHandler(EventDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public async Task Persist(AddSourceEvent persistEvent)
         {
-            AddEvents.Add(persistEvent);
+            await _dbContext.AddSourceEvent.AddAsync(persistEvent);
         }
 
-        public async Task<AddSourceEvent[]> All()
+        public Task<AddSourceEvent[]> All()
         {
-            return AddEvents.OrderBy(x => x.When).ToArray();
+            return _dbContext.AddSourceEvent.OrderBy(x => x.When).ToArrayAsync();
         }
 
         public async Task Persist(EditSourceEvent persistEvent)
         {
-            EditEvents.Add(persistEvent);
+            await _dbContext.EditSourceEvent.AddAsync(persistEvent);
         }
 
         public async Task Persist(DeleteSourceEvent persistEvent)
         {
-            DeleteEvents.Add(persistEvent);
+            await _dbContext.DeleteSourceEvent.AddAsync(persistEvent);
         }
 
-        async Task<EditSourceEvent[]> IHandleEventProvide<EditSourceEvent>.All()
+        Task<EditSourceEvent[]> IHandleEventProvide<EditSourceEvent>.All()
         {
-            return EditEvents.OrderBy(x => x.When).ToArray();
+            return _dbContext.EditSourceEvent.OrderBy(x => x.When).ToArrayAsync();
         }
 
-        async Task<DeleteSourceEvent[]> IHandleEventProvide<DeleteSourceEvent>.All()
+        Task<DeleteSourceEvent[]> IHandleEventProvide<DeleteSourceEvent>.All()
         {
-            return DeleteEvents.OrderBy(x => x.When).ToArray();
+            return _dbContext.DeleteSourceEvent.OrderBy(x => x.When).ToArrayAsync();
         }
     }
 }

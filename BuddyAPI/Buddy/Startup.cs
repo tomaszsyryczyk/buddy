@@ -64,6 +64,7 @@ namespace Buddy
             builder.RegisterModule(new MyApplicationModule());
             builder.RegisterModule(new BusinessLogicModule());
             builder.RegisterModule(new DataLayerModule());
+            builder.RegisterModule(new DataLayerEventModule());
         }
 
         readonly string origins = "*";

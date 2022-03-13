@@ -1,23 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic.Wallet.Events;
+using Microsoft.EntityFrameworkCore;
 using TS.Common;
 
-namespace DataLayer.Events
+namespace DataLayer.Events.Wallet
 {
     internal class WalletRecordEventHandler : IHandleEventPersist<WalletRecordEvent>, IHandleEventProvide<WalletRecordEvent>
     {
-        private static readonly List<WalletRecordEvent> Events = new List<WalletRecordEvent>();
+        private readonly EventDbContext _dbContext;
+        public WalletRecordEventHandler(EventDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public async Task Persist(WalletRecordEvent persistEvent)
         {
-            Events.Add(persistEvent);
+            await _dbContext.WalletRecordEvent.AddAsync(persistEvent);
         }
 
-        public async Task<WalletRecordEvent[]> All()
+        public Task<WalletRecordEvent[]> All()
         {
-            return Events.OrderBy(x => x.When).ToArray();
+            return _dbContext.WalletRecordEvent.OrderBy(x => x.When).ToArrayAsync();
         }
     }
 }

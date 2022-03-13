@@ -1,56 +1,61 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BusinessLogic.Wallet;
 using BusinessLogic.Wallet.Events;
 using BusinessLogic.Wallet.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Wallet
 {
     internal class SourceRepository : ISourceRepository
     {
-        private static List<Source> _sources ;
+        private readonly BuddyDbContext _context;
 
-        public SourceRepository()
+        public SourceRepository(BuddyDbContext context)
         {
-            if (_sources == null)
-                _sources = new List<Source>();
+            _context = context;
         }
 
         public async Task Add(AddSourceType type, string name)
         {
-            var newId = _sources.Any() ? _sources.Max(x => x.Id) + 1 : 1;
-            var toAdd = new Source(newId, name, Map(type));
-            _sources.Add(toAdd);
+            await _context.Source.AddAsync(new Source(name, Map(type)));
         }
 
         public async Task Edit(int id, AddSourceType newType, string newName)
         {
-            if (_sources.Exists(x => x.Id == id))
+            var source = await _context.Source.FirstOrDefaultAsync(x => x.Id == id);
+            if (source != null)
             {
-                var index = _sources.FindIndex(x => x.Id == id);
-                _sources[index].Name = newName;
-                _sources[index].Type = Map(newType);
+                source.Name = newName;
+                source.Type = Map(newType);
             }
         }
 
         public async Task Remove(int id)
         {
-            if (_sources.Exists(x => x.Id == id))
+            var source = await _context.Source.FirstOrDefaultAsync(x => x.Id == id);
+            if (source != null)
             {
-                var index = _sources.FindIndex(x => x.Id == id);
-                _sources.RemoveAt(index);
+                _context.Source.Remove(source);
             }
         }
 
         public async Task<Source> Get(int id)
         {
-            return _sources.Find(x => x.Id == id);
+            var source = await _context.Source.FirstOrDefaultAsync(x => x.Id == id);
+            if (source != null)
+            {
+                return source;
+            }
+
+            //todo:
+            throw new ArgumentException("");
         }
 
         public async Task<Source[]> GetAll()
         {
-            return _sources.ToArray();
+            return await _context.Source.ToArrayAsync();
         }
 
         private SourceType Map(AddSourceType type)

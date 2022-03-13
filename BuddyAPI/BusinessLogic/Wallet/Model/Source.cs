@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BusinessLogic.Wallet.Model
+﻿namespace BusinessLogic.Wallet.Model
 {
     public class Source
     {
-        public Source(int id, string name, SourceType type)
+        public Source(string name, SourceType type)
         {
-            Id = id;
             Name = name;
             Type = type;
         }

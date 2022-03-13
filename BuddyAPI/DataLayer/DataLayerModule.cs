@@ -10,7 +10,7 @@ namespace DataLayer
         {
             var assembly = typeof(DataLayerModule).Assembly;
             base.Load(builder);
-            builder.RegisterRepositoriesByNameConvention(assembly);
+            builder.RegisterByNameConvention(assembly, "Repository");
 
             builder.Register(context => new Work(context.Resolve<BuddyDbContext>())).As<IWork>()
                 .InstancePerLifetimeScope();
