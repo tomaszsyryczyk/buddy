@@ -2,6 +2,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BusinessLogic;
 using DataLayer;
+using DataLayer.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TS.Common;
+using TS.Common.Datalayer;
 
 namespace Buddy
 {
@@ -35,6 +37,9 @@ namespace Buddy
                         builder.AllowAnyMethod();
                     });
             });
+
+            services.AddDbContext<EventDbContext>(options => options.UseServerWithSchema("EventContext","events"));
+            services.AddDbContext<BuddyDbContext>(options => options.UseServerWithSchema("BuddyContext", "dbo"));
 
             services.AddControllers();
 

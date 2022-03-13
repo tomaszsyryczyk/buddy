@@ -2,17 +2,16 @@
 using TS.Common;
 using TS.Common.Datalayer;
 
-namespace DataLayer
+namespace DataLayer.Events
 {
-    public class DataLayerModule : Module
+    public class DataLayerEventModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var assembly = typeof(DataLayerModule).Assembly;
+            var assembly = typeof(DataLayerEventModule).Assembly;
             base.Load(builder);
             builder.RegisterRepositoriesByNameConvention(assembly);
-
-            builder.Register(context => new Work(context.Resolve<BuddyDbContext>())).As<IWork>()
+            builder.Register(context => new Work(context.Resolve<EventDbContext>())).As<IEventWork>()
                 .InstancePerLifetimeScope();
         }
     }

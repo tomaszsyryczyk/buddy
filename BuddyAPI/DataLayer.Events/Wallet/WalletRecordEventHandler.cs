@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using BusinessLogic.Wallet.Events;
 using TS.Common;
 
-namespace BusinessLogic.Wallet
+namespace DataLayer.Events
 {
     internal class WalletRecordEventHandler : IHandleEventPersist<WalletRecordEvent>, IHandleEventProvide<WalletRecordEvent>
     {

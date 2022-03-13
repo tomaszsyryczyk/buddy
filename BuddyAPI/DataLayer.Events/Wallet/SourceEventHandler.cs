@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using BusinessLogic.Wallet.Events;
 using TS.Common;
 
-namespace BusinessLogic.Wallet
+namespace DataLayer.Events
 {
-    internal class SourceEventHandler : 
+    internal class SourceEventHandler :
         IHandleEventPersist<AddSourceEvent>,
         IHandleEventPersist<EditSourceEvent>,
         IHandleEventPersist<DeleteSourceEvent>,

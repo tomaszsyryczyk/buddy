@@ -17,14 +17,14 @@ namespace DataLayer.Wallet
                 _sources = new List<Source>();
         }
 
-        public async Task Add(AddSourceEventType type, string name)
+        public async Task Add(AddSourceType type, string name)
         {
             var newId = _sources.Any() ? _sources.Max(x => x.Id) + 1 : 1;
             var toAdd = new Source(newId, name, Map(type));
             _sources.Add(toAdd);
         }
 
-        public async Task Edit(int id, AddSourceEventType newType, string newName)
+        public async Task Edit(int id, AddSourceType newType, string newName)
         {
             if (_sources.Exists(x => x.Id == id))
             {
@@ -53,12 +53,12 @@ namespace DataLayer.Wallet
             return _sources.ToArray();
         }
 
-        private SourceType Map(AddSourceEventType type)
+        private SourceType Map(AddSourceType type)
         {
-            var dict = new Dictionary<AddSourceEventType, SourceType>()
+            var dict = new Dictionary<AddSourceType, SourceType>()
             {
-                {AddSourceEventType.Wallet, SourceType.Wallet },
-                { AddSourceEventType.Account, SourceType.Account}
+                {AddSourceType.Wallet, SourceType.Wallet },
+                { AddSourceType.Account, SourceType.Account}
             };
 
             return dict[type];
