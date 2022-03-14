@@ -15,4 +15,8 @@
     <ProjectReference Include="..\TS.Common\TS.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

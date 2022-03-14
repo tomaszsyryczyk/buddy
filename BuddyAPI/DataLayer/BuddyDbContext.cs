@@ -11,5 +11,10 @@ namespace DataLayer
 
         }
         public DbSet<Source> Source { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BuddyDbContext).Assembly);
+        }
     }
 }

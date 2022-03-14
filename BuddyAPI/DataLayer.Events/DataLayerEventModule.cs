@@ -11,7 +11,7 @@ namespace DataLayer.Events
             var assembly = typeof(DataLayerEventModule).Assembly;
             base.Load(builder); 
             builder.RegisterByNameConvention(assembly, "EventHandler");
-            builder.Register(context => new Work(context.Resolve<EventDbContext>())).As<IEventWork>()
+            builder.Register(context => new EventWork(context.Resolve<EventDbContext>())).As<IEventWork>()
                 .InstancePerLifetimeScope();
         }
     }

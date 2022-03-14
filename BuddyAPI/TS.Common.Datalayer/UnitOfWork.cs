@@ -19,6 +19,7 @@ namespace TS.Common.Datalayer
         public void Dispose()
         {
             _transaction?.Rollback();
+            // why?
             GC.SuppressFinalize(this);
         }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace TS.Common.Datalayer
@@ -9,6 +10,10 @@ namespace TS.Common.Datalayer
         where TEnum : struct
         {
             return property.HasConversion(new EnumToStringConverter<TEnum>());
+        }
+        public static PropertyBuilder MoneyType(this PropertyBuilder property)
+        {
+            return property.HasColumnType("decimal(18,2)");
         }
     }
 }
