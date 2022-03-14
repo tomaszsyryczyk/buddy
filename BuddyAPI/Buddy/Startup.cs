@@ -37,9 +37,8 @@ namespace Buddy
                         builder.AllowAnyMethod();
                     });
             });
-
-            services.AddDbContext<EventDbContext>(options => options.UseServerWithSchema("EventContext","events"));
-            services.AddDbContext<BuddyDbContext>(options => options.UseServerWithSchema("BuddyContext", "dbo"));
+            services.AddDbContext<EventDbContext>(options => options.UseServerWithSchema(Configuration.GetConnectionString("EventDbContext"), "events"));
+            services.AddDbContext<BuddyDbContext>(options => options.UseServerWithSchema(Configuration.GetConnectionString("BuddyDbContext"), "dbo"));
 
             services.AddControllers();
 
