@@ -2,27 +2,19 @@
     import DataTable, { Head, Body, Row, Cell } from "@smui/data-table";
     import LinearProgress from "@smui/linear-progress";
     import Button from "@smui/button";
-    import ApiModule from "./../../api-access/api.svelte";
+    import {Api} from "./../../api-access/api.svelte";
+	import { onMount } from 'svelte';
 
-    let items = [];
+    let data = [];
     let loaded = true;
-    loadThings();
 
-    function loadThings() {
-        if (typeof fetch !== "undefined") {
-            loaded = false;
+    onMount(async () => {
+		loadData();
+	});
 
-            fetch(
-                "https://gist.githubusercontent.com/hperrin/e24a4ebd9afdf2a8c283338ae5160a62/raw/dcbf8e6382db49b0dcab70b22f56b1cc444f26d4/users.json"
-            )
-                .then((response) => response.json())
-                .then((json) =>
-                    setTimeout(() => {
-                        items = json;
-                        loaded = true;
-                    })
-                );
-        }
+    function loadData() {
+        let api = new Api();
+        api.get("wallet");       
     }
 </script>
 
@@ -37,7 +29,7 @@
         </Row>
     </Head>
     <Body>
-        {#each items as item (item.id)}
+        {#each data as item (item.id)}
             <Row>
                 <Cell numeric>{item.id}</Cell>
                 <Cell>{item.name}</Cell>

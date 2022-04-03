@@ -10,10 +10,7 @@
 <script>
 	import { link } from "svelte-spa-router";
 	export let menus;
-	import { apiModule } from "./../api-access/api.svelte";
 	import Accordion, { Panel, Header, Content } from "@smui-extra/accordion";
-
-	apiModule.getSimpleData();
 </script>
 
 {#each menus as menu}

@@ -7,13 +7,13 @@ namespace Buddy.Controllers
     public class WalletController : BuddyControllerBase
     {
 
-        [HttpGet("/")]
+        [HttpGet]
         public string Test()
         {
             return "test working";
         }
 
-        [HttpPut("/")]
+        [HttpPut]
         public void Test2(string asdf)
         {
             int x = 0;
