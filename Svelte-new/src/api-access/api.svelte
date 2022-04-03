@@ -14,19 +14,19 @@
     // });
 
     function httpGet(url, callback) {
-        httpRequest("get",url,null,callback);
+        httpRequest('get',url,null,callback);
     }
 
     function httpPost(url, data, callback) {
-        httpRequest("post",url,data,callback);
+        httpRequest('post',url,data,callback);
     }
 
     function httpPut(url, data, callback) {
-        httpRequest("put",url,data,callback);
+        httpRequest('put',url,data,callback);
     }
 
     function httpDelete(url, data, callback) {
-        httpRequest("delete",url,data,callback);
+        httpRequest('delete',url,data,callback);
     }
 
     function httpRequest(method,url,data,callback){
@@ -36,8 +36,8 @@
             data: data
             })
             .catch(function (error) {
-                debugger;
                 console.log("Show error notification!");
+                console.log(error);
                 return Promise.reject(error);
             })
             .then(function (e) {
