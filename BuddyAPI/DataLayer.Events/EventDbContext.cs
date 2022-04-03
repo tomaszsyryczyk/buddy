@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Wallet.Events;
+﻿sing BusinessLogic.Wallet.Events;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Events

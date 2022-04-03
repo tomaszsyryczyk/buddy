@@ -1,15 +1,15 @@
+using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BusinessLogic;
 using DataLayer;
-using DataLayer.Events;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using TS.Common;
 using TS.Common.Datalayer;
 
 namespace Buddy
@@ -37,10 +37,11 @@ namespace Buddy
                         builder.AllowAnyMethod();
                     });
             });
-            services.AddDbContext<EventDbContext>(options => options.UseServerWithSchema(Configuration.GetConnectionString("EventDbContext"), "events"));
             services.AddDbContext<BuddyDbContext>(options => options.UseServerWithSchema(Configuration.GetConnectionString("BuddyDbContext"), "dbo"));
 
-            services.AddControllers();
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddControllers().AddControllersAsServices();
 
             services.AddSwaggerGen(c =>
             {
@@ -59,11 +60,9 @@ namespace Buddy
             // call builder.Populate(), that happens in AutofacServiceProviderFactory
             // for you.
 
-            builder.RegisterModule(new CommonModule());
             builder.RegisterModule(new MyApplicationModule());
             builder.RegisterModule(new BusinessLogicModule());
             builder.RegisterModule(new DataLayerModule());
-            builder.RegisterModule(new DataLayerEventModule());
         }
 
         readonly string origins = "*";

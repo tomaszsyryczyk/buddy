@@ -12,13 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
-    <ProjectReference Include="..\DataLayer.Events\DataLayer.Events.csproj" />
     <ProjectReference Include="..\TS.Common.Datalayer\TS.Common.Datalayer.csproj" />
     <ProjectReference Include="..\TS.Common\TS.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Stocks\Configuration\" />
   </ItemGroup>
 
 </Project>

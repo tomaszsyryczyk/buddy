@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{8E716188-5DAF-459B-936F-3B9E1F12385B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Common.Datalayer", "TS.Common.Datalayer\TS.Common.Datalayer.csproj", "{181C6CBC-8803-490A-8373-BB7E53B0586A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer.Events", "DataLayer.Events\DataLayer.Events.csproj", "{6F2F8D75-3B5B-4701-9EC5-58139A5A4683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TS.Common.Datalayer", "TS.Common.Datalayer\TS.Common.Datalayer.csproj", "{181C6CBC-8803-490A-8373-BB7E53B0586A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{181C6CBC-8803-490A-8373-BB7E53B0586A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{181C6CBC-8803-490A-8373-BB7E53B0586A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{181C6CBC-8803-490A-8373-BB7E53B0586A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F2F8D75-3B5B-4701-9EC5-58139A5A4683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F2F8D75-3B5B-4701-9EC5-58139A5A4683}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F2F8D75-3B5B-4701-9EC5-58139A5A4683}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F2F8D75-3B5B-4701-9EC5-58139A5A4683}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

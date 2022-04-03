@@ -1,0 +1,6 @@
+/node_modules/
+/public/build/
+/release-builds/
+.DS_Store
+/dist/
+/release/

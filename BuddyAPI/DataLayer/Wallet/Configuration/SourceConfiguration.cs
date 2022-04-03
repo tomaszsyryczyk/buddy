@@ -1,5 +1,4 @@
-﻿using System;
-using BusinessLogic.Wallet.Model;
+﻿using BusinessLogic.Wallet.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TS.Common.Datalayer;

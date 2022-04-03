@@ -4,9 +4,4 @@
     {
         IUnitOfWork Start();
     }
-
-    public interface IEventWork : IWork
-    {
-
-    }
 }

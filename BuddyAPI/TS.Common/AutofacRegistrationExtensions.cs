@@ -5,26 +5,19 @@ namespace TS.Common
 {
     public static class AutofacRegistrationExtensions
     {
-        public static void RegisterEventHandlers(this ContainerBuilder builder, Assembly assembly)
+        public static void RegisterByNameConvention(this ContainerBuilder builder, Assembly assembly, string endsWith)
         {
             builder.RegisterAssemblyTypes(assembly)
-                .AsClosedTypesOf(typeof(IHandleEventPersist<>))
-                .AsImplementedInterfaces();
-
-            builder.RegisterAssemblyTypes(assembly)
-                .AsClosedTypesOf(typeof(IHandleEventProvide<>))
-                .AsImplementedInterfaces();
-
-            builder.RegisterAssemblyTypes(assembly)
-                .AsClosedTypesOf(typeof(IHandleEventExecution<>))
-                .AsImplementedInterfaces();
+                          .Where(x => x.Name.EndsWith(endsWith))
+                          .AsImplementedInterfaces();
         }
 
-        public static void RegisterByNameConvention(this ContainerBuilder builder, Assembly assembly, string name)
+        public static void RegisterByNameConventionWithAutowired(this ContainerBuilder builder, Assembly assembly, string endsWith )
         {
             builder.RegisterAssemblyTypes(assembly)
-                          .Where(x => x.Name.EndsWith(name))
-                          .AsImplementedInterfaces();
+                .Where(x => x.Name.EndsWith(endsWith))
+                .AsImplementedInterfaces()
+                .PropertiesAutowired();
         }
     }
 }
