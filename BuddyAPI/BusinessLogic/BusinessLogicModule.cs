@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using TS.Common;
 
 namespace BusinessLogic
 {
@@ -8,6 +9,8 @@ namespace BusinessLogic
         {
             var assembly = typeof(BusinessLogicModule).Assembly;
             base.Load(builder);
+
+            builder.RegisterByNameConvention(assembly, "Handler");
         }
     }
 }

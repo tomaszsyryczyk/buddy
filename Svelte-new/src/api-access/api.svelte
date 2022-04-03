@@ -2,7 +2,7 @@
     let BASE_API_URL = "https://localhost:5001/api/";
 
     axios.defaults.baseURL = BASE_API_URL;
-    axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
+    axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
     //axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
     // const instance = axios.create({
@@ -13,25 +13,38 @@
     //     },
     // });
 
-    function httpGet(url) {
-        debugger;
-        axios
-            .get(url)
+    function httpGet(url, callback) {
+        httpRequest("get",url,null,callback);
+    }
+
+    function httpPost(url, data, callback) {
+        httpRequest("post",url,data,callback);
+    }
+
+    function httpPut(url, data, callback) {
+        httpRequest("put",url,data,callback);
+    }
+
+    function httpDelete(url, data, callback) {
+        httpRequest("delete",url,data,callback);
+    }
+
+    function httpRequest(method,url,data,callback){
+        axios({
+            method: method,
+            url: url,
+            data: data
+            })
             .catch(function (error) {
                 debugger;
                 console.log("Show error notification!");
                 return Promise.reject(error);
             })
             .then(function (e) {
-                debugger;
+                if(callback)
+                    callback(e);
             });
     }
-
-    function httpPost(url, data) {}
-
-    function httpPut(url, data) {}
-
-    function httpDelete(url, data) {}
 
     export function Api() {
         var self = this;

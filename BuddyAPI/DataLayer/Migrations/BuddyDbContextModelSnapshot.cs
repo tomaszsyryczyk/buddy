@@ -18,7 +18,7 @@ namespace DataLayer.Migrations
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BusinessLogic.Wallet.Model.Source", b =>
+            modelBuilder.Entity("BusinessLogic.Settings.FixedExpenses.Entities.FixedExpense", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -28,13 +28,12 @@ namespace DataLayer.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Value")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Source");
+                    b.ToTable("FixedExpense");
                 });
 #pragma warning restore 612, 618
         }

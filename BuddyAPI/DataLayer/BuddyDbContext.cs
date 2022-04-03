@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Wallet.Model;
+﻿using BusinessLogic.Settings.FixedExpenses.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer
@@ -10,7 +10,7 @@ namespace DataLayer
         {
 
         }
-        public DbSet<Source> Source { get; set; }
+        public DbSet<FixedExpense> FixedExpense { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

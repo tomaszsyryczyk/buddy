@@ -5,6 +5,11 @@ namespace Buddy.Controllers
 {
     public abstract class BuddyControllerBase : ControllerBase
     {
-        public IMediator Mediator { get; set; }
+        public readonly IMediator Mediator;
+
+        protected BuddyControllerBase(IMediator mediator)
+        {
+            Mediator = mediator;
+        }
     }
 }

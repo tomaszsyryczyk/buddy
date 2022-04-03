@@ -38,7 +38,7 @@ namespace Buddy
                     });
             });
             services.AddDbContext<BuddyDbContext>(options => options.UseServerWithSchema(Configuration.GetConnectionString("BuddyDbContext"), "dbo"));
-
+            services.AddAutoMapper(typeof(BusinessLogicModule));
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddControllers().AddControllersAsServices();
