@@ -1,6 +1,7 @@
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Buddy.Middleware;
 using BusinessLogic;
 using DataLayer;
 using MediatR;
@@ -63,6 +64,7 @@ namespace Buddy
             builder.RegisterModule(new MyApplicationModule());
             builder.RegisterModule(new BusinessLogicModule());
             builder.RegisterModule(new DataLayerModule());
+            builder.RegisterType<ExceptionHandlingMiddleware>().InstancePerLifetimeScope();
         }
 
         readonly string origins = "*";
@@ -76,7 +78,7 @@ namespace Buddy
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseRouting();

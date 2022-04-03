@@ -41,13 +41,13 @@ namespace Buddy.Controllers
         [HttpPost]
         public async Task Edit([FromBody]EditFixedExpense request)
         {
-            await Mediator.Send(request);
+            await Mediator.Publish(request);
         }
 
         [HttpDelete]
         public async Task Delete([FromBody]DeleteFixedExpense request)
         {
-            await Mediator.Send(request);
+            await Mediator.Publish(request);
         }
 
     }
