@@ -5,17 +5,21 @@
     import { Api } from "./../../api-access/api.svelte";
     import { onMount } from "svelte";
     import FixedExpensesDialog, {CreateFixedExpense} from "./fixed-expenses-dialog.svelte";
+    import FixedExpensesApi from "./fixed-expenses.api.svelte";
 
+    let fixedExpensesApi = new FixedExpensesApi();
     let data = [];
     let loaded = true;
     let newFixedExpense = {};
     let api = new Api();
+    let modalOpen = {};
+    let successAction = null;
 
     onMount(async () => {
-        loadData();
+        all();
     });
 
-    function loadData() {        
+    function all() {        
         api.get("settings/fixed-expenses/all", dataLoaded);
     };
 
@@ -23,18 +27,46 @@
         data = response.data;
     };
 
-    function createNew(){
+    function create(){
         newFixedExpense = new CreateFixedExpense();
+        successAction = createCommit;
+    }
+
+    function createCommit(){
+        api.put("settings/fixed-expenses/", newFixedExpense, function(){
+            all();
+        });
     }
 
     function edit(id){
-        let response = api.get("settings/fixed-expenses/" + id);
-        newFixedExpense = new CreateFixedExpense(response.data);
+        api.get("settings/fixed-expenses/" + id, function(response){
+            newFixedExpense = new CreateFixedExpense(response.data);
+            successAction = editCommit;
+        });        
+    }
+
+    function editCommit(){
+        api.post("settings/fixed-expenses/"+newFixedExpense.id, newFixedExpense, function(){
+            all();
+        });
+    }
+
+    function remove(id){
+        api.get("settings/fixed-expenses/" + id, function(response){
+            newFixedExpense = new CreateFixedExpense(response.data);
+            successAction = removeCommit;
+        });  
+    };
+
+    function removeCommit(){
+        api.delete("settings/fixed-expenses/"+newFixedExpense.id, null, function(){
+            all();
+        });
     }
 
 </script>
 
-<Button variant="raised">Add</Button>
+<Button on:click={create} variant="raised">Add</Button>
 <DataTable table$aria-label="User list" style="width: 100%;">
     <Head>
         <Row>
@@ -51,8 +83,8 @@
                 <Cell>{item.name}</Cell>
                 <Cell>{item.value}</Cell>
                 <Cell>
-                    <Button variant="raised">Edit</Button>
-                    <Button variant="raised">Delete</Button>
+                    <Button on:click={edit(item.id)} variant="raised">Edit</Button>
+                    <Button on:click={remove(item.id)} variant="raised">Delete</Button>
                 </Cell>
             </Row>
         {/each}
@@ -66,4 +98,4 @@
     />
 </DataTable>
 
-<FixedExpensesDialog data={newFixedExpense}  />
+<FixedExpensesDialog bind:open={modalOpen} bind:data={newFixedExpense} successAction={successAction} />

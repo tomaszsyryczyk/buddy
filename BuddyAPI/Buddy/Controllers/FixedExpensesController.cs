@@ -16,7 +16,6 @@ namespace Buddy.Controllers
         {
             
         }
-        
 
         [HttpPut]
         public async Task Create([FromBody]CreateFixedExpense request)
@@ -38,17 +37,20 @@ namespace Buddy.Controllers
             return result;
         }
 
-        [HttpPost]
-        public async Task Edit([FromBody]EditFixedExpense request)
+        [HttpPost("{id}")]
+        public async Task Edit(int id,[FromBody]EditFixedExpense request)
         {
+            request.Id = id;
             await Mediator.Publish(request);
         }
 
-        [HttpDelete]
-        public async Task Delete([FromBody]DeleteFixedExpense request)
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
         {
-            await Mediator.Publish(request);
+            await Mediator.Publish(new DeleteFixedExpense()
+            {
+                Id = id,
+            });
         }
-
     }
 }
