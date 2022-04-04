@@ -4,14 +4,18 @@
 	import Menu ,{menuItem} from "./menu/menu.svelte";	
 	import NotFound from "./routes/not-found/not-found.svelte";
 	import FixedExpenses from "./routes/fixed-expenses/fixed-expenses.svelte";
+	import Sources from "./routes/sources/sources.svelte";
 
 	const routes = {
 		"/settings/fixed-expenses" : FixedExpenses,
+		'/settings/sources':Sources,
 		"*": NotFound,
 	};
 
 	const menus = [
+		new menuItem("Wydatki", "/expenses", ""),
 		new menuItem("Wydatki stałe", "/settings/fixed-expenses", ""),
+		new menuItem("Worki pieniędzy", "/settings/sources", ""),
 	];
 
 </script>

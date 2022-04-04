@@ -22,7 +22,7 @@ namespace BusinessLogic.Settings.FixedExpenses.Handlers
         {
             var unitOfWork = _work.Start();
             var item = await _repository.Get(request.Id);
-            item.SetValues(request.Name, request.Value);
+            item.Update(request.Name, request.Value);
 
             await unitOfWork.Done();
         }
