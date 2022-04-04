@@ -5,6 +5,7 @@
         public Wallet(string name)
         {
             this.Name = name;
+            IsDeleted = false;
         }
         public string Name { get; set; }
         public bool IsDeleted { get; set; }

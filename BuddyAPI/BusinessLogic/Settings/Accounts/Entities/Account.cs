@@ -6,6 +6,7 @@
         {
             this.Name = name;
             this.Iban = iban;
+            IsDeleted = false;
         }
 
         public string Name { get; set; }
