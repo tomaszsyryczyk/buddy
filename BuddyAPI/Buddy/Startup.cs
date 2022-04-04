@@ -11,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using TS.Common.Datalayer;
 
 namespace Buddy
@@ -42,7 +45,14 @@ namespace Buddy
             services.AddAutoMapper(typeof(BusinessLogicModule));
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddControllers().AddControllersAsServices();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.TypeNameHandling = TypeNameHandling.Objects;
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddSwaggerGen(c =>
             {

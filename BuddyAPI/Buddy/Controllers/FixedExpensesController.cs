@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BusinessLogic.Settings.FixedExpenses.Messages;
+using BusinessLogic.Settings.FixedExpenses.Model;
 using DataLayer.Settings.FixedExpenses.Model;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -52,5 +53,13 @@ namespace Buddy.Controllers
                 Id = id,
             });
         }
+
+        [HttpGet("summary")]
+        public async Task<FixedExpenseSummaryDetails> Summary()
+        {
+            var result = await Mediator.Send(new FixedExpenseSummary());
+            return result;
+        }
+
     }
 }

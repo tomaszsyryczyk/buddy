@@ -3,17 +3,14 @@
 	import MainBar from "./main-bar/main-bar.svelte";
 	import Menu ,{menuItem} from "./menu/menu.svelte";	
 	import NotFound from "./routes/not-found/not-found.svelte";
-	import Settings from "./routes/settings/settings.svelte";
-	import FixedExpenses from "./routes/settings/fixed-expenses.svelte";
+	import FixedExpenses from "./routes/fixed-expenses/fixed-expenses.svelte";
 
 	const routes = {
-		"/settings" : Settings,
 		"/settings/fixed-expenses" : FixedExpenses,
 		"*": NotFound,
 	};
 
 	const menus = [
-		new menuItem("settings", "/settings", "fa-cogs"),
 		new menuItem("Wydatki stałe", "/settings/fixed-expenses", ""),
 	];
 

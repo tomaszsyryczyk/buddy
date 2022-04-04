@@ -3,15 +3,7 @@
 
     axios.defaults.baseURL = BASE_API_URL;
     axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-    //axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-    // const instance = axios.create({
-    //     baseURL: BASE_API_URL,
-    //     timeout: 1000 * 60 * 10,
-    //     headers: {
-    //         "Access-Control-Allow-Origin": "*",
-    //     },
-    // });
+    axios.defaults.headers.put["Content-Type"] = "application/json";
 
     function httpGet(url, callback) {
         httpRequest('get',url,null,callback);
