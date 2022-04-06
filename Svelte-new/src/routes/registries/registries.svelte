@@ -6,7 +6,7 @@
     import EditDialog from "./dialog-edit.svelte";
     import DeleteDialog from "./dialog-delete.svelte";
 
-    import { Api } from "./../../../api-access/api.svelte";
+    import { Api } from "./../../api-access/api.svelte";
     let api = new Api();
 
     let data = [];
@@ -23,11 +23,12 @@
     }
 
     function dataLoaded(response) {
-        data = response.data.accounts;
+        debugger;
+        data = response.data;
     }
 
     function all() {
-        api.get("settings/accounts/list", dataLoaded);
+        api.get("registry/list", dataLoaded);
     }
 
     function create(){
@@ -49,8 +50,9 @@
     <Head>
         <Row>
             <Cell hidden>ID</Cell>
-            <Cell>Name</Cell>
-            <Cell numeric>IBAN</Cell>
+            <Cell>From</Cell>
+            <Cell>To</Cell>
+            <Cell numeric>Amount</Cell>
             <Cell />
         </Row>
     </Head>
@@ -58,8 +60,9 @@
         {#each data as item (item.id)}
             <Row>
                 <Cell hidden>{item.id}</Cell>
-                <Cell>{item.name}</Cell>
-                <Cell numeric>{item.iban}</Cell>
+                <Cell>{item.from}</Cell>
+                <Cell>{item.to}</Cell>
+                <Cell numeric>{item.amount}</Cell>
                 <Cell>
                     <Button on:click={edit(item.id)} variant="raised"
                         >Edit</Button

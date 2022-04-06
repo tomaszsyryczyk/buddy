@@ -36,7 +36,7 @@
     }
 
     function all() {
-        api.get("settings/fixed-expenses/all", dataLoaded);
+        api.get("settings/fixed-expenses/list", dataLoaded);
     }
 
     function create(){

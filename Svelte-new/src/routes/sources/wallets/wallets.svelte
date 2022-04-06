@@ -27,7 +27,7 @@
     }
 
     function all() {
-        api.get("settings/wallet/all", dataLoaded);
+        api.get("settings/wallet/list", dataLoaded);
     }
 
     function create(){

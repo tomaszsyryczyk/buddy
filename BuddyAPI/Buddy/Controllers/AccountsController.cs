@@ -30,7 +30,7 @@ namespace Buddy.Controllers
             return result;
         }
 
-        [HttpGet("all")]
+        [HttpGet("list")]
         public async Task<AccountList> GetAll()
         {
             var result = await Mediator.Send(new GetAllAccounts());

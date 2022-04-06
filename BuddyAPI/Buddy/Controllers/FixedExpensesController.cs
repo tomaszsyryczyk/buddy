@@ -31,7 +31,7 @@ namespace Buddy.Controllers
             return result;
         }
 
-        [HttpGet("all")]
+        [HttpGet("list")]
         public async Task<IEnumerable<FixedExpenseDetails>> GetAll()
         {
             var result = await Mediator.Send(new GetAllFixedExpense());

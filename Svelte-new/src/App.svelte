@@ -5,15 +5,17 @@
 	import NotFound from "./routes/not-found/not-found.svelte";
 	import FixedExpenses from "./routes/fixed-expenses/fixed-expenses.svelte";
 	import Sources from "./routes/sources/sources.svelte";
+	import Registry from "./routes/registries/registries.svelte";
 
 	const routes = {
 		"/settings/fixed-expenses" : FixedExpenses,
 		'/settings/sources':Sources,
+		'/registry':Registry,
 		"*": NotFound,
 	};
 
 	const menus = [
-		new menuItem("Wydatki", "/expenses", ""),
+		new menuItem("Wydatki", "/registry", ""),
 		new menuItem("Wydatki stałe", "/settings/fixed-expenses", ""),
 		new menuItem("Worki pieniędzy", "/settings/sources", ""),
 	];

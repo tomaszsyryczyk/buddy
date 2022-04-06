@@ -1,29 +1,30 @@
 ﻿using System.Threading.Tasks;
-using BusinessLogic.Settings.Wallets.Messeges;
-using BusinessLogic.Settings.Wallets.Model;
+using BusinessLogic.Registers.Messages;
+using BusinessLogic.Registers.Model;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Buddy.Controllers
 {
+
     [ApiController]
-    [Route("api/settings/wallet")]
-    public class WalletController : BuddyControllerBase
+    [Route("api/registry")]
+    public class RegistryController : BuddyControllerBase
     {
-        public WalletController(IMediator mediator) : base(mediator)
+        public RegistryController(IMediator mediator) : base(mediator)
         {
         }
 
         [HttpPut]
-        public async Task Create([FromBody]CreateWallet request)
+        public async Task Create([FromBody] CreateRegistry request)
         {
             await Mediator.Publish(request);
         }
 
         [HttpGet("{id}")]
-        public async Task<WalletDetails> Get(int id)
+        public async Task<RegistryDetails> Get(int id)
         {
-            var result = await Mediator.Send(new GetWallet()
+            var result = await Mediator.Send(new GetRegistry()
             {
                 Id = id
             });
@@ -31,14 +32,14 @@ namespace Buddy.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<WalletList> GetAll()
+        public async Task<RegistryList> GetAll([FromBody] GetRegistryList request)
         {
-            var result = await Mediator.Send(new GetAllWallets());
+            var result = await Mediator.Send(request);
             return result;
         }
 
         [HttpPost("{id}")]
-        public async Task Edit(int id, [FromBody]EditWallet request)
+        public async Task Edit(int id, [FromBody] EditRegistry request)
         {
             request.Id = id;
             await Mediator.Publish(request);
@@ -47,7 +48,7 @@ namespace Buddy.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            await Mediator.Publish(new DeleteWallet()
+            await Mediator.Publish(new DeleteRegistry()
             {
                 Id = id,
             });
