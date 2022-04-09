@@ -23,7 +23,14 @@ namespace BusinessLogic.Registers.Handlers
         {
             var unitOfWork = _work.Start();
 
-            await _repository.Add(new Registry(request.From, request.To,request.Amount));
+            await _repository.Add(new Registry()
+            {
+                Amount = request.Amount,
+                From = request.From,
+                To = request.To,
+                Type = request.Type,
+                When = request.When
+            });
 
             await unitOfWork.Done();
         }

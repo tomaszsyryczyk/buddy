@@ -21,7 +21,7 @@ namespace BusinessLogic.Registers.Handlers
         {
             var unitOfWork = _work.Start();
             var item = await _repository.Get(request.Id);
-            item.Update(request.From, request.To, request.Amount);
+            item.Update(request.From, request.To, request.Amount, request.When, request.Type);
 
             await unitOfWork.Done();
         }

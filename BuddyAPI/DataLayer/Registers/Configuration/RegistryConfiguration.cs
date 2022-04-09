@@ -10,8 +10,10 @@ namespace DataLayer.Registers.Configuration
         public void Configure(EntityTypeBuilder<Registry> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.From).DatetimeOffsetType();
-            builder.Property(x => x.To).DatetimeOffsetType();
+            builder.Property(x => x.From);
+            builder.Property(x => x.To);
+            builder.Property(x => x.Type).EnumAsString();
+            builder.Property(x => x.When).DatetimeOffsetType();
             builder.Property(x => x.Amount).MoneyType();
         }
     }

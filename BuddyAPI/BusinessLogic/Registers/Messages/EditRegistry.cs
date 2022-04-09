@@ -1,4 +1,5 @@
 ﻿using System;
+using BusinessLogic.Registers.Entities;
 using MediatR;
 
 namespace BusinessLogic.Registers.Messages
@@ -7,9 +8,13 @@ namespace BusinessLogic.Registers.Messages
     {
         public int Id { get; set; }
 
-        public DateTimeOffset From { get; set; }
+        public string From { get; set; }
 
-        public DateTimeOffset To { get; set; }
+        public string To { get; set; }
+
+        public DateTimeOffset When { get; set; }
+
+        public RegistryType Type { get; set; }
 
         public decimal Amount { get; set; }
     }
