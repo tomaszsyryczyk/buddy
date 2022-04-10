@@ -3,6 +3,7 @@
     import Button, { Label } from "@smui/button";
     import Textfield from "@smui/textfield";
     import { Api } from "./../../api-access/api.svelte";
+    import {dateInShowFormat} from "./../../components/consts.svelte";
 
     let api = new Api();
     let open = false;
@@ -18,14 +19,16 @@
     function Create(data) {
         let self = this;
         self.id = 0;
-        self.from = '';
-        self.to = '';
+        self.name = '';
         self.amount = 0;
+        self.when = '';
+        self.type = '';
         if (data) {
             self.id = data.id;
-            self.from = data.from;
-            self.to = data.to;
+            self.name = data.name;
             self.amount = data.amount;
+            self.when = data.when;
+            self.type = data.type;
         }
     }
 
@@ -50,9 +53,10 @@
 >
     <Title id="simple-title">Are you sure you want to remove it?</Title>
     <Content id="slider-content">
-        <Textfield disabled type="date" variant="outlined" bind:value={data.from} label="Name" />
-        <Textfield disabled type="date" variant="outlined" bind:value={data.to} label="Name" />
-        <Textfield disabled type="number" variant="outlined" bind:value={data.amount} label="Value" />
+        <Textfield disabled variant="filled" value={dateInShowFormat(data.when)} label="When" />
+        <Textfield disabled variant="filled" value={data.type} label="Type"/>
+        <Textfield disabled variant="filled" value={data.amount} label="Amount" />
+        <Textfield disabled variant="filled" value={data.name} label="Name" />
     </Content>
     <Actions>
         <Button on:click={closeDialog}>

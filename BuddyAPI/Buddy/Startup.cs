@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -47,7 +48,12 @@ namespace Buddy
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
+                options.SerializerSettings.DateParseHandling = DateParseHandling.None;
                 options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                options.SerializerSettings.Converters.Add(new FixedIsoDateTimeOffsetConverter()
+                {
+                    DateTimeStyles = DateTimeStyles.AssumeLocal
+                });
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.Formatting = Formatting.Indented;
                 options.SerializerSettings.TypeNameHandling = TypeNameHandling.Objects;

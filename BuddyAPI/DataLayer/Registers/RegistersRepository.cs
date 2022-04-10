@@ -21,7 +21,7 @@ namespace DataLayer.Registers
             await _context.Registry.AddAsync(entity);
         }
 
-        public async Task<IEnumerable<Registry>> All(DateTimeOffset from, DateTimeOffset to)
+        public async Task<IEnumerable<Registry>> All()
         {
             var data = await _context
                 .Registry

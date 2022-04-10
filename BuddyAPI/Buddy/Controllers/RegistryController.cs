@@ -32,8 +32,9 @@ namespace Buddy.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<RegistryList> GetAll([FromBody] GetRegistryList request)
+        public async Task<RegistryList> GetAll()
         {
+            var request = new GetRegistryList();
             var result = await Mediator.Send(request);
             return result;
         }

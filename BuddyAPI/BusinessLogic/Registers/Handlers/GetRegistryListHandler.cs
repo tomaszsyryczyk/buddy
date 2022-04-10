@@ -21,7 +21,7 @@ namespace BusinessLogic.Registers.Handlers
 
         public async Task<RegistryList> Handle(GetRegistryList request, CancellationToken cancellationToken)
         {
-            var all = await _repository.All(request.From, request.To);
+            var all = await _repository.All();
 
             var result = all.Select(_mapper.Map<RegistryDetails>);
 

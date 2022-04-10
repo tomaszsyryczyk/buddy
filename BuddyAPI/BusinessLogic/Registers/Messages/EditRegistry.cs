@@ -7,10 +7,7 @@ namespace BusinessLogic.Registers.Messages
     public class EditRegistry : INotification
     {
         public int Id { get; set; }
-
-        public string From { get; set; }
-
-        public string To { get; set; }
+        public string Name { get; set; }
 
         public DateTimeOffset When { get; set; }
 

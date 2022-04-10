@@ -26,8 +26,6 @@ namespace BusinessLogic.Registers.Handlers
             await _repository.Add(new Registry()
             {
                 Amount = request.Amount,
-                From = request.From,
-                To = request.To,
                 Type = request.Type,
                 When = request.When
             });
