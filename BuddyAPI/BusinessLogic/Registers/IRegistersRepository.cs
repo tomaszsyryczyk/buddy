@@ -8,7 +8,7 @@ namespace BusinessLogic.Registers
     public interface IRegistersRepository
     {
         Task Add(Registry entity);
-        Task<IEnumerable<Registry>> All();
+        Task<IEnumerable<Registry>> All(DateTimeOffset requestFrom, DateTimeOffset requestTo);
         Task Delete(int id);
         Task<Registry> Get(int id);
     }

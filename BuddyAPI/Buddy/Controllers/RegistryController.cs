@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using BusinessLogic.Registers.Messages;
 using BusinessLogic.Registers.Model;
 using MediatR;
@@ -32,9 +33,13 @@ namespace Buddy.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<RegistryList> GetAll()
+        public async Task<RegistryList> GetAll(DateTimeOffset from, DateTimeOffset to )
         {
-            var request = new GetRegistryList();
+            var request = new GetRegistryList()
+            {
+                From = from,
+                To = to
+            };
             var result = await Mediator.Send(request);
             return result;
         }

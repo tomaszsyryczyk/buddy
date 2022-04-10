@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic.Registers;
 using BusinessLogic.Registers.Entities;
@@ -21,10 +22,11 @@ namespace DataLayer.Registers
             await _context.Registry.AddAsync(entity);
         }
 
-        public async Task<IEnumerable<Registry>> All()
+        public async Task<IEnumerable<Registry>> All(DateTimeOffset requestFrom, DateTimeOffset requestTo)
         {
             var data = await _context
                 .Registry
+                .Where(x => x.When >= requestFrom && x.When <= requestTo)
                 .ToListAsync();
 
             return data;

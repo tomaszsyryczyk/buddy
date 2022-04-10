@@ -5,8 +5,8 @@
     axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
     axios.defaults.headers.put["Content-Type"] = "application/json";
 
-    function httpGet(url, callback) {
-        httpRequest('get',url,null,callback);
+    function httpGet(url, data, callback) {
+        httpRequestWithDataAsParams('get',url,data,callback);
     }
 
     function httpPost(url, data, callback) {
@@ -28,6 +28,24 @@
             data: data
             })
             .catch(function (error) {
+                console.log("Show error notification!");
+                console.log(error);
+                return Promise.reject(error);
+            })
+            .then(function (e) {
+                if(callback)
+                    callback(e);
+            });
+    }
+
+    function httpRequestWithDataAsParams(method,url,data,callback){
+        axios({
+            method: method,
+            url: url,
+            params: data
+            })
+            .catch(function (error) {
+                debugger;
                 console.log("Show error notification!");
                 console.log(error);
                 return Promise.reject(error);
