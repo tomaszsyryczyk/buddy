@@ -78,7 +78,7 @@
                 <Cell numeric>
                     <CurrencyText value={item.amount} currencyUnit="zł" isPositive="{item.isIncome()}" />
                 </Cell>
-                <Cell>{dateInShowFormat(item.when1)}</Cell>
+                <Cell>{dateInShowFormat(item.when)}</Cell>
                 <Cell style="width: 100%;">{item.name}</Cell>
                 <Cell>
                     <Button on:click={edit(item.id)} variant="raised"
