@@ -9,6 +9,20 @@ import isDev from 'electron-is-dev';
 const height = 600;
 const width = 800;
 
+const UpsertKeyValue = (obj : any, keyToChange : string, value : string[]) => {
+  const keyToChangeLower = keyToChange.toLowerCase();
+  for (const key of Object.keys(obj)) {
+    if (key.toLowerCase() === keyToChangeLower) {
+      // Reassign old key
+      obj[key] = value;
+      // Done
+      return;
+    }
+  }
+  // Insert at end instead
+  obj[keyToChange] = value;
+}
+
 const startDjangoServer = () => 
 {
   const djangoBackend = spawn(`api\\venv\\Scripts\\python.exe`,
@@ -50,6 +64,23 @@ function createWindow() {
     webPreferences: {
       preload: join(__dirname, 'preload.js')
     }
+  });
+
+  window.webContents.session.webRequest.onBeforeSendHeaders(
+    (details, callback) => {
+      const { requestHeaders } = details;
+      UpsertKeyValue(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
+      callback({ requestHeaders });
+    },
+  );
+
+  window.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+    const { responseHeaders } = details;
+    UpsertKeyValue(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
+    UpsertKeyValue(responseHeaders, 'Access-Control-Allow-Headers', ['*']);
+    callback({
+      responseHeaders,
+    });
   });
 
   const port = process.env.PORT || 3000;

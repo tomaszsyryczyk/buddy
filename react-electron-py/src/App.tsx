@@ -1,42 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEvent , useState } from 'react';
 import AppBar from './AppBar';
 import axiosInstance from "./axios";
 
 function App() {
+  console.log("START");
   console.log(window.ipcRenderer);
     
   const [textToSend, setTextToSend] = useState<string>("test");
   const [serverResponse, setServerResponse] = useState<string | null>(null);
-  //const [fromMain, setFromMain] = useState<string | null>(null);
 
-  const requestServer = async () => {
+  const requestServer = async (event : MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     const response = await axiosInstance.get("/get_val_from/", { params: {
         input: textToSend
       } });
     setServerResponse(response.data);
+    
   };
 
-  useEffect(() => {
-    console.log('Server response: ', serverResponse);
-    // You can perform other actions here
-  }, [serverResponse]);
-  
-  
-  // const sendMessageToElectron = () => {
-  //   if (window.Main) {
-  //     window.Main.sendMessage("Hello I'm from React World");
-  //   } else {
-  //     setFromMain('You are in a Browser, so no Electron functions are available');
-  //   }
-  //   setSent(true);
-  // };
   // useEffect(() => {
-  //   if (isSent && window.Main)
-  //     window.Main.on('message', (message: string) => {
-  //       setFromMain(message);
-  //     });
-  // }, [fromMain, isSent]);
-
+  //   console.log('Server response: ', serverResponse);
+  //   // You can perform other actions here
+  // }, [serverResponse]);
+  
+  
   return (
     <div className="flex flex-col h-screen">
       {window.Main && (
@@ -54,6 +41,7 @@ function App() {
             Click Me
           </button>
           <input value={textToSend} onChange={(event) => setTextToSend(event.target.value)}/>
+          <h1 className="text-2xl text-gray-200">{ serverResponse }</h1>
         </div>
       </div>
     </div>
