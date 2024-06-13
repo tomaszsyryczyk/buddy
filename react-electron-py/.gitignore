@@ -8,7 +8,7 @@ dist-ssr
 /main
 /dist
 /src/out
-
+/out
 # debug
 npm-debug.log*
 yarn-debug.log*

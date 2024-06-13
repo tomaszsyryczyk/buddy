@@ -1,13 +1,39 @@
 // Native
 import { join } from 'path';
-import { spawn } from 'child_process';
+import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 
 // Packages
 import { BrowserWindow, app, ipcMain, IpcMainEvent } from 'electron';
 import isDev from 'electron-is-dev';
 
+let DJANGO_CHILD_PROCESS: ChildProcessWithoutNullStreams ;
+
+if (require('electron-squirrel-startup')) {
+  // eslint-disable-line global-require
+  app.quit();
+}
+
 const height = 600;
 const width = 800;
+
+const spawnDjango = () =>
+{
+  if ( isDevelopmentEnv() )
+  {
+    return spawn(`python\\venv\\Scripts\\python.exe`,
+      ['python\\backend\\manage.py', 'runserver', '--noreload'], {
+        shell: true,
+      });
+  }
+  return spawn(`cd backend && api.exe runserver --settings=app.settings.prod --noreload`,  {
+    shell: true,
+  });
+}
+
+const isDevelopmentEnv = () => {
+  console.log( `NODE_ENV=${ process.env.NODE_ENV }` )
+  return process.env.NODE_ENV == 'development'
+}
 
 const UpsertKeyValue = (obj : any, keyToChange : string, value : string[]) => {
   const keyToChangeLower = keyToChange.toLowerCase();
@@ -25,32 +51,30 @@ const UpsertKeyValue = (obj : any, keyToChange : string, value : string[]) => {
 
 const startDjangoServer = () => 
 {
-  const djangoBackend = spawn(`api\\venv\\Scripts\\python.exe`,
-      ['api\\assist\\manage.py', 'runserver', '--noreload']);
-  djangoBackend.stdout.on('data', data =>
+  DJANGO_CHILD_PROCESS = spawnDjango();
+  DJANGO_CHILD_PROCESS.stdout.on('data', data =>
   {
     console.log(`stdout:\n${data}`);
   });
-  djangoBackend.stderr.on('data', data =>
+  DJANGO_CHILD_PROCESS.stderr.on('data', data =>
   {
     console.log(`stderr: ${data}`);
   });
-  djangoBackend.on('error', (error) =>
+  DJANGO_CHILD_PROCESS.on('error', (error) =>
   {
     console.log(`error: ${error.message}`);
   });
-  djangoBackend.on('close', (code) =>
+  DJANGO_CHILD_PROCESS.on('close', (code) =>
   {
     console.log(`child process exited with code ${code}`);
   });
-  djangoBackend.on('message', (message) =>
+  DJANGO_CHILD_PROCESS.on('message', (message) =>
   {
     console.log(`message:\n${message}`);
   });
-  return djangoBackend;
+  return DJANGO_CHILD_PROCESS;
 }
 
-let djangoBackend = startDjangoServer();
 function createWindow() {
   // Create the browser window.
   const window = new BrowserWindow({
@@ -65,7 +89,7 @@ function createWindow() {
       preload: join(__dirname, 'preload.js')
     }
   });
-
+  startDjangoServer()
   window.webContents.session.webRequest.onBeforeSendHeaders(
     (details, callback) => {
       const { requestHeaders } = details;
@@ -128,7 +152,7 @@ app.whenReady().then(() => {
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   app.quit();
-  djangoBackend.kill();
+  DJANGO_CHILD_PROCESS.kill();
 });
 
 // In this file you can include the rest of your app's specific main process
