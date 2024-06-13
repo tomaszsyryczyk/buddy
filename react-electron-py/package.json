@@ -13,10 +13,7 @@
     "electron",
     "typescript"
   ],
-  "repository": {
-    "url": "https://github.com/lTimeless/vite-reactts-electron-starter"
-  },
-  "productName": "vite-reactts-electron-starter",
+  "productName": "desktop-assist",
   "scripts": {
     "dev": "concurrently \"yarn dev:vite\" \" yarn dev:electron\"",
     "dev:vite": "vite",
