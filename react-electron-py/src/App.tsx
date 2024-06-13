@@ -1,28 +1,23 @@
 import React, { MouseEvent , useState } from 'react';
 import AppBar from './AppBar';
-import axiosInstance from "./axios";
+import fetchData from './api-access/fetchData';
+import { useQuery } from 'react-query';
 
-function App() {
-  console.log("START");
-  console.log(window.ipcRenderer);
+const App : React.FC = () => {
+  //console.log(window.ipcRenderer);
     
   const [textToSend, setTextToSend] = useState<string>("test");
   const [serverResponse, setServerResponse] = useState<string | null>(null);
-
-  const requestServer = async (event : MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    const response = await axiosInstance.get("/get_val_from/", { params: {
-        input: textToSend
-      } });
-    setServerResponse(response.data);
-    
-  };
-
-  // useEffect(() => {
-  //   console.log('Server response: ', serverResponse);
-  //   // You can perform other actions here
-  // }, [serverResponse]);
+  const {refetch} = useQuery(['data', textToSend], () => fetchData.testData({textToSend : textToSend}),{
+    enabled: false, 
+  });
   
+  const RequestServer = async (event : MouseEvent<HTMLButtonElement>) => {
+     let response = await refetch();
+     console.log("REFETCH czy coś takiego");
+     console.log(response);
+     setServerResponse(response.data);
+  };
   
   return (
     <div className="flex flex-col h-screen">
@@ -36,7 +31,7 @@ function App() {
           <h1 className="text-2xl text-gray-200">Vite + React + Typescript + Electron + Tailwind</h1>
           <button
             className="bg-yellow-400 py-2 px-4 rounded focus:outline-none shadow hover:bg-yellow-200"
-            onClick={requestServer}
+            onClick={RequestServer}
           >
             Click Me
           </button>
