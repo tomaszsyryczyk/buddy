@@ -6,7 +6,7 @@ const path = require('path');
 module.exports = function( extractPath, electronVersion, platform, arch, done )
 {
   console.log({ extractPath });
-  fs.copy('./backend/dist/api', path.join( extractPath, 'backend' ), () => {
+  fs.copy('./python/dist/api', path.join( extractPath, 'backend' ), () => {
 
     console.log('Finished Copy Python Folder');
     done();
